@@ -33,6 +33,10 @@ android {
             testCoverageEnabled true
         }
     }
+    sourceSets {
+        test.java.srcDirs += 'src/testCommon/java'
+        androidTest.java.srcDirs += 'src/testCommon/java'
+    }
 }
 
 dependencies {
