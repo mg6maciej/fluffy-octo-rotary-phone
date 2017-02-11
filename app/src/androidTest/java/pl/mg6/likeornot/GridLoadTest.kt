@@ -1,8 +1,8 @@
 package pl.mg6.likeornot
 
 import android.support.test.rule.ActivityTestRule
-import com.elpassion.android.commons.espresso.hasText
-import com.elpassion.android.commons.espresso.onId
+import com.elpassion.android.commons.espresso.isDisplayed
+import com.elpassion.android.commons.espresso.onText
 import io.reactivex.Single.just
 import org.junit.Rule
 import org.junit.Test
@@ -24,6 +24,6 @@ class GridLoadTest {
 
     @Test
     fun shouldShowLikable() {
-        onId(R.id.likable_item_name).hasText("Michael Jackson")
+        onText("Michael Jackson").isDisplayed()
     }
 }
