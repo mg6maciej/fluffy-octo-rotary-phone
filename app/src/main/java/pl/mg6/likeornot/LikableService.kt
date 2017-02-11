@@ -1,6 +1,8 @@
 package pl.mg6.likeornot
 
-fun getLikables(api: LikableApi) = api.call().map(::toLikableList)
+import io.reactivex.Single
+
+fun getLikables(api: LikableApi): Single<List<Likable>> = api.call().map(::toLikableList)
 
 private fun toLikableList(list: List<LikableFromApi>) = list.map { it.toLikable() }
 
