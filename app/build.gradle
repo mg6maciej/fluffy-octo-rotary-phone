@@ -46,4 +46,5 @@ dependencies {
     testCompile('com.nhaarman:mockito-kotlin:1.2.0') {
         exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib'
     }
+    testCompile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 }
