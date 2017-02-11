@@ -1,6 +1,6 @@
 package pl.mg6.likeornot
 
-class Likable(
+data class Likable(
         val uuid: String,
         val name: String,
         val image: String)
