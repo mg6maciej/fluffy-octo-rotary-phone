@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.GridLayout
+import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 
 class GridPagerAdapter(private val gridItems: List<List<Likable>>) : PagerAdapter() {
 
@@ -18,6 +20,8 @@ class GridPagerAdapter(private val gridItems: List<List<Likable>>) : PagerAdapte
             val view = grid.getChildAt(i)
             val name = view.findViewById(R.id.likable_item_name) as TextView
             name.text = it[i].name
+            val image = view.findViewById(R.id.likable_item_image) as ImageView
+            Glide.with(container.context).load(it[i].image).into(image)
         }
         container.addView(grid)
         return grid

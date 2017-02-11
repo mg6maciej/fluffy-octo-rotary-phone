@@ -4,6 +4,11 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
+    <ImageView
+        android:id="@+id/likable_item_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+
     <TextView
         android:id="@+id/likable_item_name"
         android:layout_width="match_parent"
