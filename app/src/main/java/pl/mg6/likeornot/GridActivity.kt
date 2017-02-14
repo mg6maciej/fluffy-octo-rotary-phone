@@ -1,6 +1,7 @@
 package pl.mg6.likeornot
 
 import android.os.Bundle
+import android.support.annotation.DimenRes
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -28,7 +29,7 @@ class GridActivity : AppCompatActivity() {
         return R.dimen.grid_pager_page_margin.pixelSize - 2 * R.dimen.grid_pager_padding.pixelSize
     }
 
-    private val Int.pixelSize get() = resources.getDimensionPixelSize(this)
+    private val @receiver:DimenRes Int.pixelSize get() = resources.getDimensionPixelSize(this)
 
     private fun showError(error: Throwable) {
         Log.e("tag", "", error)
