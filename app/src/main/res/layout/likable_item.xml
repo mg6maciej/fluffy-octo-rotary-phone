@@ -24,4 +24,10 @@
         android:textColor="@android:color/white"
         tools:text="Michael Jackson" />
 
+    <ImageView
+        android:id="@+id/likable_item_status"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/like" />
+
 </FrameLayout>
