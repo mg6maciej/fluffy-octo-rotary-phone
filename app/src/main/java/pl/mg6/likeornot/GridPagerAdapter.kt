@@ -22,6 +22,9 @@ class GridPagerAdapter(private val gridItems: List<List<Likable>>) : PagerAdapte
             val image = view.findViewById(R.id.likable_item_image) as ImageView
             Glide.with(container.context).load(it[i].image).into(image)
         }
+        for (i in it.size until grid.childCount) {
+            grid.getChildAt(i).visibility = View.INVISIBLE
+        }
         container.addView(grid)
         return grid
     }
