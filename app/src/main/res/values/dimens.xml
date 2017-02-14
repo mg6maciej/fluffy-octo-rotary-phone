@@ -3,4 +3,5 @@
     <dimen name="grid_pager_padding">32dp</dimen>
     <dimen name="grid_pager_page_margin">16dp</dimen>
     <dimen name="likable_items_inner_margin">1dp</dimen>
+    <dimen name="overlay_button_size">40dp</dimen>
 </resources>

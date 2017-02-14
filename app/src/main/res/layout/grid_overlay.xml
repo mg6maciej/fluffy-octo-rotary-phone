@@ -42,11 +42,55 @@
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
-            <ImageButton
+            <ImageView
+                android:id="@+id/grid_overlay_really_like"
+                android:layout_width="@dimen/overlay_button_size"
+                android:layout_height="@dimen/overlay_button_size"
+                android:src="@drawable/really_like" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <ImageView
                 android:id="@+id/grid_overlay_like"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/overlay_button_size"
+                android:layout_height="@dimen/overlay_button_size"
                 android:src="@drawable/like" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/grid_overlay_meh"
+                android:layout_width="@dimen/overlay_button_size"
+                android:layout_height="@dimen/overlay_button_size"
+                android:src="@drawable/meh" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/grid_overlay_dont_like"
+                android:layout_width="@dimen/overlay_button_size"
+                android:layout_height="@dimen/overlay_button_size"
+                android:src="@drawable/dont_like" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/grid_overlay_hate"
+                android:layout_width="@dimen/overlay_button_size"
+                android:layout_height="@dimen/overlay_button_size"
+                android:src="@drawable/hate" />
 
             <android.support.v4.widget.Space
                 android:layout_width="0dp"

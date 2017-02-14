@@ -47,4 +47,17 @@ class GridShowOverlayTest {
         onId(R.id.grid_overlay_like).click()
         onId(R.id.grid_overlay).isNotDisplayed()
     }
+
+    @Test
+    fun shouldHideAfterClickingAnyButton() {
+        onLikableItem(R.id.likable_item_1).click()
+        onId(R.id.grid_overlay_really_like).click()
+        onLikableItem(R.id.likable_item_1).click()
+        onId(R.id.grid_overlay_meh).click()
+        onLikableItem(R.id.likable_item_1).click()
+        onId(R.id.grid_overlay_dont_like).click()
+        onLikableItem(R.id.likable_item_1).click()
+        onId(R.id.grid_overlay_hate).click()
+        onId(R.id.grid_overlay).isNotDisplayed()
+    }
 }

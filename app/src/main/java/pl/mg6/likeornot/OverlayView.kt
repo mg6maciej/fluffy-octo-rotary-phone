@@ -16,8 +16,13 @@ class OverlayView(private val activity: Activity) {
         name.text = likable.name
         val image = overlay.findViewById(R.id.grid_overlay_image) as ImageView
         Glide.with(activity).load(likable.image).into(image)
-        overlay.findViewById(R.id.grid_overlay_like).setOnClickListener {
+        val handleClick: (View) -> Unit = {
             overlay.visibility = View.GONE
         }
+        overlay.findViewById(R.id.grid_overlay_really_like).setOnClickListener(handleClick)
+        overlay.findViewById(R.id.grid_overlay_like).setOnClickListener(handleClick)
+        overlay.findViewById(R.id.grid_overlay_meh).setOnClickListener(handleClick)
+        overlay.findViewById(R.id.grid_overlay_dont_like).setOnClickListener(handleClick)
+        overlay.findViewById(R.id.grid_overlay_hate).setOnClickListener(handleClick)
     }
 }
