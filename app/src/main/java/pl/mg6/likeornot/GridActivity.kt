@@ -16,13 +16,19 @@ class GridActivity : AppCompatActivity() {
 
     private fun showLikables(likables: List<Likable>) {
         val pager = findViewById(R.id.grid_pager) as ViewPager
-        pager.pageMargin = resources.getDimensionPixelOffset(R.dimen.grid_pager_page_margin)
+        pager.pageMargin = calculatePageMargin()
         val gridItems = likables
                 .mapIndexed { index, likable -> index to likable }
                 .groupBy { it.first / 9 }
                 .map { it.value.map { it.second } }
         pager.adapter = GridPagerAdapter(gridItems)
     }
+
+    private fun calculatePageMargin(): Int {
+        return R.dimen.grid_pager_page_margin.pixelSize - 2 * R.dimen.grid_pager_padding.pixelSize
+    }
+
+    private val Int.pixelSize get() = resources.getDimensionPixelSize(this)
 
     private fun showError(error: Throwable) {
         Log.e("tag", "", error)

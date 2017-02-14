@@ -10,8 +10,6 @@
         android:id="@+id/grid_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:paddingLeft="@dimen/grid_pager_padding"
-        android:paddingRight="@dimen/grid_pager_padding" />
+        android:clipToPadding="false" />
 
 </pl.mg6.likeornot.view.SquareFrameLayout>
