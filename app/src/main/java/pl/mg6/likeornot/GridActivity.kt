@@ -5,6 +5,7 @@ import android.support.annotation.DimenRes
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.View.VISIBLE
 
 class GridActivity : AppCompatActivity() {
 
@@ -22,7 +23,9 @@ class GridActivity : AppCompatActivity() {
                 .mapIndexed { index, likable -> index to likable }
                 .groupBy { it.first / 9 }
                 .map { it.value.map { it.second } }
-        pager.adapter = GridPagerAdapter(gridItems)
+        pager.adapter = GridPagerAdapter(gridItems) {
+            findViewById(R.id.grid_overlay).visibility = VISIBLE
+        }
     }
 
     private fun calculatePageMargin(): Int {

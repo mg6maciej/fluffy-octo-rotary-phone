@@ -8,21 +8,24 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 
-class GridPagerAdapter(private val gridItems: List<List<Likable>>) : PagerAdapter() {
+class GridPagerAdapter(private val gridItems: List<List<Likable>>, private val clickCallback: (Likable) -> Unit) : PagerAdapter() {
 
     override fun getCount() = gridItems.size
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val it = gridItems[position]
+        val likables = gridItems[position]
         val grid = LayoutInflater.from(container.context).inflate(R.layout.likable_page, container, false) as ViewGroup
-        for (i in 0 until minOf(it.size, grid.childCount)) {
+        for (i in 0 until minOf(likables.size, grid.childCount)) {
             val view = grid.getChildAt(i)
+            view.setOnClickListener {
+                clickCallback.invoke(likables[i])
+            }
             val name = view.findViewById(R.id.likable_item_name) as TextView
-            name.text = it[i].name
+            name.text = likables[i].name
             val image = view.findViewById(R.id.likable_item_image) as ImageView
-            Glide.with(container.context).load(it[i].image).into(image)
+            Glide.with(container.context).load(likables[i].image).into(image)
         }
-        for (i in it.size until grid.childCount) {
+        for (i in likables.size until grid.childCount) {
             grid.getChildAt(i).visibility = View.INVISIBLE
         }
         container.addView(grid)
