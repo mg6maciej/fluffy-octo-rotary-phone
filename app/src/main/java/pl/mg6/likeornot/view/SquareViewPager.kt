@@ -10,7 +10,8 @@ class SquareViewPager : ViewPager {
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        setMeasuredDimension(measuredWidth, measuredWidth)
+        val width = MeasureSpec.getSize(widthMeasureSpec)
+        val newHeightMeasureSpec = MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY)
+        super.onMeasure(widthMeasureSpec, newHeightMeasureSpec)
     }
 }
