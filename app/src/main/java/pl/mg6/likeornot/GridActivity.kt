@@ -6,6 +6,8 @@ import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View.VISIBLE
+import android.widget.ImageView
+import com.bumptech.glide.Glide
 
 class GridActivity : AppCompatActivity() {
 
@@ -24,7 +26,10 @@ class GridActivity : AppCompatActivity() {
                 .groupBy { it.first / 9 }
                 .map { it.value.map { it.second } }
         pager.adapter = GridPagerAdapter(gridItems) {
-            findViewById(R.id.grid_overlay).visibility = VISIBLE
+            val overlay = findViewById(R.id.grid_overlay)
+            overlay.visibility = VISIBLE
+            val image = overlay.findViewById(R.id.grid_overlay_image) as ImageView
+            Glide.with(this).load(it.image).into(image)
         }
     }
 

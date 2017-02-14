@@ -12,10 +12,6 @@
         android:layout_height="match_parent"
         android:clipToPadding="false" />
 
-    <View
-        android:id="@+id/grid_overlay"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#000" />
+    <include layout="@layout/grid_overlay" />
 
 </pl.mg6.likeornot.view.SquareFrameLayout>
