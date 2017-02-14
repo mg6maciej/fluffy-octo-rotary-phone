@@ -13,6 +13,8 @@ import com.bumptech.glide.Glide
 
 class GridActivity : AppCompatActivity() {
 
+    private val overlayView by lazy { OverlayView(this) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.grid_activity)
@@ -27,18 +29,7 @@ class GridActivity : AppCompatActivity() {
                 .mapIndexed { index, likable -> index to likable }
                 .groupBy { it.first / 9 }
                 .map { it.value.map { it.second } }
-        pager.adapter = GridPagerAdapter(gridItems) {
-            val overlay = findViewById(R.id.grid_overlay)
-            overlay.setOnTouchListener { _, _ -> true }
-            overlay.visibility = VISIBLE
-            val name = overlay.findViewById(R.id.grid_overlay_name) as TextView
-            name.text = it.name
-            val image = overlay.findViewById(R.id.grid_overlay_image) as ImageView
-            Glide.with(this).load(it.image).into(image)
-            overlay.findViewById(R.id.grid_overlay_like).setOnClickListener {
-                overlay.visibility = GONE
-            }
-        }
+        pager.adapter = GridPagerAdapter(gridItems, overlayView::showLikable)
     }
 
     private fun calculatePageMargin(): Int {
