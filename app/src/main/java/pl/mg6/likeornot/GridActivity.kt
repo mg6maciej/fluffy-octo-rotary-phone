@@ -5,6 +5,7 @@ import android.support.annotation.DimenRes
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.ImageView
 import android.widget.TextView
@@ -34,6 +35,9 @@ class GridActivity : AppCompatActivity() {
             name.text = it.name
             val image = overlay.findViewById(R.id.grid_overlay_image) as ImageView
             Glide.with(this).load(it.image).into(image)
+            overlay.findViewById(R.id.grid_overlay_like).setOnClickListener {
+                overlay.visibility = GONE
+            }
         }
     }
 

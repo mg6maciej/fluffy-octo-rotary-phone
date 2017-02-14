@@ -40,4 +40,11 @@ class GridShowOverlayTest {
     fun shouldNotBeDisplayedAtFirst() {
         onId(R.id.grid_overlay).isNotDisplayed()
     }
+
+    @Test
+    fun shouldHideAfterLiking() {
+        onLikableItem(R.id.likable_item_1).click()
+        onId(R.id.grid_overlay_like).click()
+        onId(R.id.grid_overlay).isNotDisplayed()
+    }
 }
