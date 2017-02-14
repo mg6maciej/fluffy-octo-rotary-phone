@@ -5,15 +5,11 @@ import android.support.annotation.DimenRes
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.view.View.GONE
-import android.view.View.VISIBLE
-import android.widget.ImageView
-import android.widget.TextView
-import com.bumptech.glide.Glide
 
 class GridActivity : AppCompatActivity() {
 
-    private val overlayView by lazy { OverlayView(this) }
+    private val overlayView by lazy { OverlayView(this, adapter::updateLikable) }
+    private lateinit var adapter: GridPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +25,8 @@ class GridActivity : AppCompatActivity() {
                 .mapIndexed { index, likable -> index to likable }
                 .groupBy { it.first / 9 }
                 .map { it.value.map { it.second } }
-        pager.adapter = GridPagerAdapter(gridItems, overlayView::showLikable)
+        adapter = GridPagerAdapter(gridItems, { overlayView.showLikable(it) })
+        pager.adapter = adapter
     }
 
     private fun calculatePageMargin(): Int {
