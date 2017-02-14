@@ -26,6 +26,10 @@ fun ViewInteraction.hasStatus(@DrawableRes imageId: Int): ViewInteraction {
     return check(matches(hasDescendant(allOf(withId(R.id.likable_item_status), withImage(imageId)))))
 }
 
+fun ViewInteraction.hasNoStatus(): ViewInteraction {
+    return check(matches(hasDescendant(allOf(withId(R.id.likable_item_status), withNoImage()))))
+}
+
 private fun withImage(@DrawableRes imageId: Int): Matcher<View> {
     return object : BoundedMatcher<View, ImageView>(ImageView::class.java) {
 
@@ -37,6 +41,19 @@ private fun withImage(@DrawableRes imageId: Int): Matcher<View> {
 
         override fun describeTo(description: Description) {
             description.appendText("has src with id: $imageId")
+        }
+    }
+}
+
+private fun withNoImage(): Matcher<View> {
+    return object : BoundedMatcher<View, ImageView>(ImageView::class.java) {
+
+        override fun matchesSafely(view: ImageView): Boolean {
+            return view.drawable == null
+        }
+
+        override fun describeTo(description: Description) {
+            description.appendText("has no src set")
         }
     }
 }
