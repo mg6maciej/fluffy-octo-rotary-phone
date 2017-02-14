@@ -31,4 +31,11 @@ class GridShowOverlayTest {
         onLikableItem(R.id.likable_item_1).click()
         onId(R.id.grid_overlay_name).hasText("Michael Jackson")
     }
+
+    @Test
+    fun shouldNotAllowToClickOtherItemsWhenDisplayed() {
+        onLikableItem(R.id.likable_item_1).click()
+        onLikableItem(R.id.likable_item_2).click()
+        onId(R.id.grid_overlay_name).hasText("Michael Jackson")
+    }
 }

@@ -28,6 +28,7 @@ class GridActivity : AppCompatActivity() {
                 .map { it.value.map { it.second } }
         pager.adapter = GridPagerAdapter(gridItems) {
             val overlay = findViewById(R.id.grid_overlay)
+            overlay.setOnTouchListener { _, _ -> true }
             overlay.visibility = VISIBLE
             val name = overlay.findViewById(R.id.grid_overlay_name) as TextView
             name.text = it.name
