@@ -19,13 +19,13 @@ class GridLoadMoreThanNineTest {
     }
 
     @Test
-    fun shouldShowEighthLikable() {
-        onLikableItemAtPosition(8).hasName("Name 9")
+    fun shouldShowNinthLikable() {
+        onLikableItem(R.id.likable_item_9).hasName("Name 9")
     }
 
     @Test
-    fun shouldShowNinthLikableAfterSwipe() {
-        onId(R.id.grid_pager).perform(swipeLeft())
-        onLikableItemAtPosition(0).hasName("Name 10")
+    fun shouldShowTenthLikableAfterSwipe() {
+        onLikableItem(R.id.grid_pager).perform(swipeLeft())
+        onLikableItem(R.id.likable_item_1).hasName("Name 10")
     }
 }

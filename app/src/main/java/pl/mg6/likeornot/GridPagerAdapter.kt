@@ -4,7 +4,6 @@ import android.support.v4.view.PagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
@@ -15,7 +14,7 @@ class GridPagerAdapter(private val gridItems: List<List<Likable>>) : PagerAdapte
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val it = gridItems[position]
-        val grid = LayoutInflater.from(container.context).inflate(R.layout.likable_page, container, false) as GridLayout
+        val grid = LayoutInflater.from(container.context).inflate(R.layout.likable_page, container, false) as ViewGroup
         for (i in 0 until minOf(it.size, grid.childCount)) {
             val view = grid.getChildAt(i)
             val name = view.findViewById(R.id.likable_item_name) as TextView

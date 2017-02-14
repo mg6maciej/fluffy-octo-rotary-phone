@@ -1,26 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/grid_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:columnCount="3">
+    android:layout_height="match_parent">
 
-    <include layout="@layout/likable_item" />
+    <include
+        android:id="@+id/likable_item_1"
+        layout="@layout/likable_item"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/likable_item_4"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/likable_item_2"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <include layout="@layout/likable_item" />
+    <include
+        android:id="@+id/likable_item_2"
+        layout="@layout/likable_item"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/likable_item_5"
+        app:layout_constraintLeft_toRightOf="@+id/likable_item_1"
+        app:layout_constraintRight_toLeftOf="@+id/likable_item_3"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <include layout="@layout/likable_item" />
+    <include
+        android:id="@+id/likable_item_3"
+        layout="@layout/likable_item"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/likable_item_6"
+        app:layout_constraintLeft_toRightOf="@+id/likable_item_2"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <include layout="@layout/likable_item" />
+    <include
+        android:id="@+id/likable_item_4"
+        layout="@layout/likable_item"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/likable_item_7"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/likable_item_5"
+        app:layout_constraintTop_toBottomOf="@+id/likable_item_1" />
 
-    <include layout="@layout/likable_item" />
+    <include
+        android:id="@+id/likable_item_5"
+        layout="@layout/likable_item"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/likable_item_8"
+        app:layout_constraintLeft_toRightOf="@+id/likable_item_4"
+        app:layout_constraintRight_toLeftOf="@+id/likable_item_6"
+        app:layout_constraintTop_toBottomOf="@+id/likable_item_2" />
 
-    <include layout="@layout/likable_item" />
+    <include
+        android:id="@+id/likable_item_6"
+        layout="@layout/likable_item"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/likable_item_9"
+        app:layout_constraintLeft_toRightOf="@+id/likable_item_5"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/likable_item_3" />
 
-    <include layout="@layout/likable_item" />
+    <include
+        android:id="@+id/likable_item_7"
+        layout="@layout/likable_item"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/likable_item_8"
+        app:layout_constraintTop_toBottomOf="@+id/likable_item_4" />
 
-    <include layout="@layout/likable_item" />
+    <include
+        android:id="@+id/likable_item_8"
+        layout="@layout/likable_item"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/likable_item_7"
+        app:layout_constraintRight_toLeftOf="@+id/likable_item_9"
+        app:layout_constraintTop_toBottomOf="@+id/likable_item_5" />
 
-    <include layout="@layout/likable_item" />
+    <include
+        android:id="@+id/likable_item_9"
+        layout="@layout/likable_item"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/likable_item_8"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/likable_item_6" />
 
-</GridLayout>
+</android.support.constraint.ConstraintLayout>

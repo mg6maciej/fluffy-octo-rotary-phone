@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/likable_item"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="0dp"
+    android:layout_height="0dp">
 
     <ImageView
         android:id="@+id/likable_item_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/likable_item_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="bottom" />
+        android:layout_gravity="bottom"
+        android:gravity="center" />
 
 </FrameLayout>

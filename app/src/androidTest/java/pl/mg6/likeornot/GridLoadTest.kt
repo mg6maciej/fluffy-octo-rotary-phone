@@ -1,6 +1,7 @@
 package pl.mg6.likeornot
 
 import android.support.test.rule.ActivityTestRule
+import com.elpassion.android.commons.espresso.onId
 import io.reactivex.Single.just
 import org.junit.Rule
 import org.junit.Test
@@ -18,6 +19,6 @@ class GridLoadTest {
 
     @Test
     fun shouldShowLikable() {
-        onLikableItemAtPosition(0).hasName("Michael Jackson")
+        onLikableItem(R.id.likable_item_1).hasName("Michael Jackson")
     }
 }
