@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View.VISIBLE
 import android.widget.ImageView
+import android.widget.TextView
 import com.bumptech.glide.Glide
 
 class GridActivity : AppCompatActivity() {
@@ -28,6 +29,8 @@ class GridActivity : AppCompatActivity() {
         pager.adapter = GridPagerAdapter(gridItems) {
             val overlay = findViewById(R.id.grid_overlay)
             overlay.visibility = VISIBLE
+            val name = overlay.findViewById(R.id.grid_overlay_name) as TextView
+            name.text = it.name
             val image = overlay.findViewById(R.id.grid_overlay_image) as ImageView
             Glide.with(this).load(it.image).into(image)
         }

@@ -14,4 +14,21 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop" />
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:layout_gravity="bottom"
+        android:background="#9000">
+
+        <TextView
+            android:id="@+id/grid_overlay_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            tools:text="Michael Jackson" />
+
+    </FrameLayout>
+
 </FrameLayout>
