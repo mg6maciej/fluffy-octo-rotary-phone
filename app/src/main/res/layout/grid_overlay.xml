@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/grid_pager_padding"
     android:paddingRight="@dimen/grid_pager_padding"
+    android:visibility="gone"
     tools:showIn="@layout/grid_activity">
 
     <ImageView
@@ -17,9 +18,9 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
         android:layout_gravity="bottom"
-        android:background="#9000">
+        android:background="#9000"
+        android:padding="16dp">
 
         <TextView
             android:id="@+id/grid_overlay_name"

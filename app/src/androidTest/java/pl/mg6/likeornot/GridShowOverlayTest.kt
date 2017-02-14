@@ -1,10 +1,7 @@
 package pl.mg6.likeornot
 
 import android.support.test.rule.ActivityTestRule
-import com.elpassion.android.commons.espresso.click
-import com.elpassion.android.commons.espresso.hasText
-import com.elpassion.android.commons.espresso.isDisplayed
-import com.elpassion.android.commons.espresso.onId
+import com.elpassion.android.commons.espresso.*
 import io.reactivex.Single.just
 import org.junit.Rule
 import org.junit.Test
@@ -37,5 +34,10 @@ class GridShowOverlayTest {
         onLikableItem(R.id.likable_item_1).click()
         onLikableItem(R.id.likable_item_2).click()
         onId(R.id.grid_overlay_name).hasText("Michael Jackson")
+    }
+
+    @Test
+    fun shouldNotBeDisplayedAtFirst() {
+        onId(R.id.grid_overlay).isNotDisplayed()
     }
 }
