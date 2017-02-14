@@ -16,6 +16,7 @@ class GridActivity : AppCompatActivity() {
 
     private fun showLikables(likables: List<Likable>) {
         val pager = findViewById(R.id.grid_pager) as ViewPager
+        pager.pageMargin = resources.getDimensionPixelOffset(R.dimen.grid_pager_page_margin)
         val gridItems = likables
                 .mapIndexed { index, likable -> index to likable }
                 .groupBy { it.first / 9 }
