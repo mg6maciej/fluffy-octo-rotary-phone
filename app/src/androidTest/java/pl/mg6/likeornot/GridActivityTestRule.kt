@@ -1,6 +1,6 @@
 package pl.mg6.likeornot
 
-import android.support.test.InstrumentationRegistry
+import android.support.test.InstrumentationRegistry.getTargetContext
 import android.support.test.rule.ActivityTestRule
 import io.reactivex.Single
 import io.reactivex.Single.just
@@ -11,7 +11,7 @@ class GridActivityTestRule(
         private val likesFileContent: String? = null)
     : ActivityTestRule<GridActivity>(GridActivity::class.java) {
 
-    val likesFile by lazy { File(InstrumentationRegistry.getTargetContext().filesDir, "likes") }
+    val likesFile by lazy { File(getTargetContext().filesDir, "likes") }
 
     override fun beforeActivityLaunched() {
         LikableApiProvider.override = object : LikableApi {

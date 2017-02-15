@@ -1,17 +1,13 @@
 package pl.mg6.likeornot
 
-import android.support.test.InstrumentationRegistry
 import com.elpassion.android.commons.espresso.*
 import org.junit.Rule
 import org.junit.Test
-import java.io.File
 
 class GridShowOverlayTest {
 
     @Rule @JvmField
     val rule = GridActivityTestRule()
-
-    private val likesFile by lazy { File(InstrumentationRegistry.getTargetContext().filesDir, "likes") }
 
     @Test
     fun shouldShowOverlay() {
