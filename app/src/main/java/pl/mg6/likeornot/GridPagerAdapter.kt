@@ -4,6 +4,7 @@ import android.support.annotation.DrawableRes
 import android.support.v4.view.PagerAdapter
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -59,5 +60,6 @@ class GridPagerAdapter(private val gridItems: List<List<Likable>>, private val c
         val view = likableToView[likable]!!
         val status = view.findViewById(R.id.likable_item_status) as ImageView
         status.setImageResource(imageId)
+        view.findViewById(R.id.likable_item_status_overlay).visibility = VISIBLE
     }
 }

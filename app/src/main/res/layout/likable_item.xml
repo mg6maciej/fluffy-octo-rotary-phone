@@ -13,9 +13,10 @@
 
     <View
         android:id="@+id/likable_item_status_overlay"
-        android:background="#6FFF"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="#6FFF"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/likable_item_name"

@@ -13,6 +13,7 @@ import android.widget.ImageView
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.core.AllOf.allOf
+import org.hamcrest.core.IsNot.not
 import pl.mg6.likeornot.OnScreenMatcher.isOnScreenAtLeast
 
 fun onLikableItem(@IdRes id: Int): ViewInteraction {
@@ -33,6 +34,10 @@ fun ViewInteraction.hasNoStatus(): ViewInteraction {
 
 fun ViewInteraction.hasStatusOverlay(): ViewInteraction {
     return check(matches(hasDescendant(allOf(withId(R.id.likable_item_status_overlay), isDisplayed()))))
+}
+
+fun ViewInteraction.doesntHaveStatusOverlay(): ViewInteraction {
+    return check(matches(hasDescendant(allOf(withId(R.id.likable_item_status_overlay), not(isDisplayed())))))
 }
 
 private fun withImage(@DrawableRes imageId: Int): Matcher<View> {
