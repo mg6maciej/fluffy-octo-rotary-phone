@@ -43,8 +43,10 @@ class GridPagerAdapter(private val gridItems: List<List<Likable>>, private val c
     override fun destroyItem(container: ViewGroup, position: Int, obj: Any) {
         val grid = obj as ViewGroup
         for (i in 0 until grid.childCount) {
-            val likable = grid.getChildAt(i).tag as Likable
-            likableToView.remove(likable)
+            val likable = grid.getChildAt(i).tag as Likable?
+            if (likable != null) {
+                likableToView.remove(likable)
+            }
         }
         container.removeView(grid)
     }
