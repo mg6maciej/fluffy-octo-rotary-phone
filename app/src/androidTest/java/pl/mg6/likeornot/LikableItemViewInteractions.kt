@@ -27,63 +27,41 @@ private val legalIds = intArrayOf(
         R.id.likable_item_4, R.id.likable_item_5, R.id.likable_item_6,
         R.id.likable_item_7, R.id.likable_item_8, R.id.likable_item_9)
 
-fun LikableItemViewInteraction.click(): LikableItemViewInteraction {
-    vi.click()
-    return this
-}
+fun LikableItemViewInteraction.click() = apply { vi.click() }
 
-fun LikableItemViewInteraction.isNotDisplayed(): LikableItemViewInteraction {
-    vi.isNotDisplayed()
-    return this
-}
+fun LikableItemViewInteraction.isNotDisplayed() = apply { vi.isNotDisplayed() }
 
-fun LikableItemViewInteraction.hasName(name: String): LikableItemViewInteraction {
+fun LikableItemViewInteraction.hasName(name: String) = apply {
     vi.check(matches(hasDescendant(allOf(withId(R.id.likable_item_name), withText(name)))))
-    return this
 }
 
-fun LikableItemViewInteraction.hasStatus(@DrawableRes imageId: Int): LikableItemViewInteraction {
+fun LikableItemViewInteraction.hasStatus(@DrawableRes imageId: Int) = apply {
     vi.check(matches(hasDescendant(allOf(withId(R.id.likable_item_status), withImage(imageId)))))
-    return this
 }
 
-fun LikableItemViewInteraction.hasNoStatus(): LikableItemViewInteraction {
+fun LikableItemViewInteraction.hasNoStatus() = apply {
     vi.check(matches(hasDescendant(allOf(withId(R.id.likable_item_status), withNoImage()))))
-    return this
 }
 
-fun LikableItemViewInteraction.hasStatusOverlay(): LikableItemViewInteraction {
+fun LikableItemViewInteraction.hasStatusOverlay() = apply {
     vi.check(matches(hasDescendant(allOf(withId(R.id.likable_item_status_overlay), isDisplayed()))))
-    return this
 }
 
-fun LikableItemViewInteraction.doesntHaveStatusOverlay(): LikableItemViewInteraction {
+fun LikableItemViewInteraction.doesntHaveStatusOverlay() = apply {
     vi.check(matches(hasDescendant(allOf(withId(R.id.likable_item_status_overlay), IsNot.not(isDisplayed())))))
-    return this
 }
 
-fun LikableItemViewInteraction.selectReallyLike(): LikableItemViewInteraction {
-    return selectWithId(R.id.grid_overlay_really_like)
-}
+fun LikableItemViewInteraction.selectReallyLike() = selectWithId(R.id.grid_overlay_really_like)
 
-fun LikableItemViewInteraction.selectLike(): LikableItemViewInteraction {
-    return selectWithId(R.id.grid_overlay_like)
-}
+fun LikableItemViewInteraction.selectLike() = selectWithId(R.id.grid_overlay_like)
 
-fun LikableItemViewInteraction.selectMeh(): LikableItemViewInteraction {
-    return selectWithId(R.id.grid_overlay_meh)
-}
+fun LikableItemViewInteraction.selectMeh() = selectWithId(R.id.grid_overlay_meh)
 
-fun LikableItemViewInteraction.selectDontLike(): LikableItemViewInteraction {
-    return selectWithId(R.id.grid_overlay_dont_like)
-}
+fun LikableItemViewInteraction.selectDontLike() = selectWithId(R.id.grid_overlay_dont_like)
 
-fun LikableItemViewInteraction.selectHate(): LikableItemViewInteraction {
-    return selectWithId(R.id.grid_overlay_hate)
-}
+fun LikableItemViewInteraction.selectHate() = selectWithId(R.id.grid_overlay_hate)
 
-private fun LikableItemViewInteraction.selectWithId(viewId: Int): LikableItemViewInteraction {
+private fun LikableItemViewInteraction.selectWithId(@IdRes viewId: Int) = apply {
     vi.click()
     onId(viewId).click()
-    return this
 }
