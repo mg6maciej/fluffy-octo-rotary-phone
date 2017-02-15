@@ -10,11 +10,3 @@ fun getLikables(api: LikableApi, localLikes: () -> Single<Map<String, Status>>):
 private fun toLikableList(list: List<LikableFromApi>, uuidToStatus: Map<String, Status>) = list.map { it.toLikable(uuidToStatus) }
 
 private fun LikableFromApi.toLikable(uuidToStatus: Map<String, Status>) = Likable(uuid, name, image.single(), uuidToStatus[uuid])
-
-enum class Status {
-    REALLY_LIKE,
-    LIKE,
-    MEH,
-    DONT_LIKE,
-    HATE,
-}
