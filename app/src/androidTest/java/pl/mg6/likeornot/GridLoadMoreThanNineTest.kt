@@ -12,7 +12,8 @@ class GridLoadMoreThanNineTest {
     val rule = GridActivityTestRule(likablesFromApi)
 
     @Test
-    fun shouldShowNinthLikable() {
+    fun shouldShowFirstAndNinthLikable() {
+        onLikableItem(R.id.likable_item_1).hasName("Name 1")
         onLikableItem(R.id.likable_item_9).hasName("Name 9")
     }
 
