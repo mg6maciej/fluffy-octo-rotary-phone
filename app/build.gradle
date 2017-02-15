@@ -41,6 +41,9 @@ android {
         javaMaxHeapSize DEX_MAX_HEAP_SIZE
         preDexLibraries = System.env.CI != 'true'
     }
+    lintOptions {
+        disable 'InvalidPackage'
+    }
 }
 
 dependencies {
