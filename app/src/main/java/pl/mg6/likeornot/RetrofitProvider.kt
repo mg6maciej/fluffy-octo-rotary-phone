@@ -3,7 +3,7 @@ package pl.mg6.likeornot
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import io.reactivex.schedulers.Schedulers
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 
 object RetrofitProvider {
 
@@ -13,7 +13,7 @@ object RetrofitProvider {
     private fun createRetrofit(): Retrofit = Retrofit.Builder()
             .baseUrl("https://raw.githubusercontent.com/mg6maciej/fluffy-octo-rotary-phone/master/")
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create())
             .build()
 
     fun get() = override?.invoke() ?: retrofit
