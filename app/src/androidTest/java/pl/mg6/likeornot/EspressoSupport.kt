@@ -4,6 +4,7 @@ import android.support.annotation.DrawableRes
 import android.support.annotation.IdRes
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.ViewInteraction
+import android.support.test.espresso.action.ViewActions
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.BoundedMatcher
 import android.support.test.espresso.matcher.ViewMatchers.*
@@ -66,6 +67,14 @@ private fun ViewInteraction.selectWithId(viewId: Int): ViewInteraction {
     val interaction = click()
     onId(viewId).click()
     return interaction
+}
+
+fun ViewInteraction.swipeLeft(): ViewInteraction {
+    return perform(ViewActions.swipeLeft())
+}
+
+fun ViewInteraction.swipeRight(): ViewInteraction {
+    return perform(ViewActions.swipeRight())
 }
 
 private fun withImage(@DrawableRes imageId: Int): Matcher<View> {

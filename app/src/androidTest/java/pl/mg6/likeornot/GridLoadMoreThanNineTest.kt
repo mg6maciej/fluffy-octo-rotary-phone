@@ -1,7 +1,5 @@
 package pl.mg6.likeornot
 
-import android.support.test.espresso.action.ViewActions.swipeLeft
-import android.support.test.espresso.action.ViewActions.swipeRight
 import com.elpassion.android.commons.espresso.onId
 import org.junit.Rule
 import org.junit.Test
@@ -19,17 +17,16 @@ class GridLoadMoreThanNineTest {
 
     @Test
     fun shouldShowTenthLikableAfterSwipe() {
-        onId(R.id.grid_pager).perform(swipeLeft())
+        onId(R.id.grid_pager).swipeLeft()
         onLikableItem(R.id.likable_item_1).hasName("Name 10")
     }
 
     @Test
     fun shouldShowStatusAndOverlayAfterComingBack() {
         onLikableItem(R.id.likable_item_1).selectDontLike()
-        onId(R.id.grid_pager).perform(swipeLeft())
-        onId(R.id.grid_pager).perform(swipeLeft())
-        onId(R.id.grid_pager).perform(swipeRight())
-        onId(R.id.grid_pager).perform(swipeRight())
+        onId(R.id.grid_pager)
+                .swipeLeft().swipeLeft()
+                .swipeRight().swipeRight()
         onLikableItem(R.id.likable_item_1)
                 .hasStatus(R.drawable.dont_like)
                 .hasStatusOverlay()
