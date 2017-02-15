@@ -28,4 +28,11 @@ class GridShowStatusTest {
     fun shouldNotShowStatusAtFirst() {
         onLikableItem(R.id.likable_item_1).hasNoStatus()
     }
+
+    @Test
+    fun shouldShowStatusOverlay() {
+        onLikableItem(R.id.likable_item_1).click()
+        onId(R.id.grid_overlay_like).click()
+        onLikableItem(R.id.likable_item_1).hasStatusOverlay()
+    }
 }

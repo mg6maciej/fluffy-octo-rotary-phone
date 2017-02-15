@@ -31,6 +31,10 @@ fun ViewInteraction.hasNoStatus(): ViewInteraction {
     return check(matches(hasDescendant(allOf(withId(R.id.likable_item_status), withNoImage()))))
 }
 
+fun ViewInteraction.hasStatusOverlay(): ViewInteraction {
+    return check(matches(hasDescendant(allOf(withId(R.id.likable_item_status_overlay), isDisplayed()))))
+}
+
 private fun withImage(@DrawableRes imageId: Int): Matcher<View> {
     return object : BoundedMatcher<View, ImageView>(ImageView::class.java) {
 
