@@ -32,6 +32,7 @@ class GridPagerAdapter(private val gridItems: List<List<Likable>>, private val c
             likable.status?.let {
                 val status = view.findViewById(R.id.likable_item_status) as ImageView
                 status.setImageResource(it.imageId)
+                view.findViewById(R.id.likable_item_status_overlay).visibility = VISIBLE
             }
             likableToView[likable] = view
             view.tag = likable

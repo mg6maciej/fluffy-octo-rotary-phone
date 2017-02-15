@@ -24,4 +24,9 @@ class GridLocalStorageTest {
                 "${michaelJacksonLikableFromApi.uuid} LIKE\n${wayneRooneyLikableFromApi.uuid} MEH\n",
                 rule.likesFile.readText())
     }
+
+    @Test
+    fun shouldShowInitialStatusOverlay() {
+        onLikableItem(R.id.likable_item_1).hasStatusOverlay()
+    }
 }
