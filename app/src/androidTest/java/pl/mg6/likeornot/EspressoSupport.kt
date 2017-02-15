@@ -13,9 +13,10 @@ import android.widget.ImageView
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.core.AllOf.allOf
+import pl.mg6.likeornot.OnScreenMatcher.isOnScreenAtLeast
 
 fun onLikableItem(@IdRes id: Int): ViewInteraction {
-    return onView(allOf(withId(id), isDisplayed()))
+    return onView(allOf(withId(id), isOnScreenAtLeast(50)))
 }
 
 fun ViewInteraction.hasName(name: String): ViewInteraction {
