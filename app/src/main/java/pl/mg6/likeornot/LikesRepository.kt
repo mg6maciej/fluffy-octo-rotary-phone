@@ -8,12 +8,9 @@ typealias LikableToStatus = Map<String, Status>
 
 fun callLocalLikes(context: Context): Single<LikableToStatus> {
     val likesFile = File(context.filesDir, "likes")
-    return if (likesFile.exists()) {
-        Single.fromCallable { likesFile.readLines() }
-                .map(::toUuidToStatusMap)
-    } else {
-        Single.just(emptyMap())
-    }
+    return Single.fromCallable { likesFile.readLines() }
+            .map(::toUuidToStatusMap)
+            .onErrorReturnItem(emptyMap())
 }
 
 private fun toUuidToStatusMap(lines: List<String>) = lines.associateBy(::extractUuid, ::extractStatus)
