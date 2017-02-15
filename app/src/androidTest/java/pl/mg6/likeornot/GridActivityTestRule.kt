@@ -14,6 +14,7 @@ class GridActivityTestRule(
     val likesFile by lazy { File(getTargetContext().filesDir, "likes") }
 
     override fun beforeActivityLaunched() {
+        RetrofitProvider.override = (GridActivityTestRule)::throwNoInternetInTests
         LikableApiProvider.override = object : LikableApi {
             override fun call(): Single<List<LikableFromApi>> {
                 return just(likablesFromApi)
@@ -25,7 +26,13 @@ class GridActivityTestRule(
     }
 
     override fun afterActivityFinished() {
+        RetrofitProvider.override = null
         LikableApiProvider.override = null
         likesFile.delete()
+    }
+
+    companion object {
+
+        fun throwNoInternetInTests(): Nothing = throw Exception("No internet in tests!")
     }
 }

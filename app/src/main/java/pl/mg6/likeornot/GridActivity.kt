@@ -6,6 +6,7 @@ import android.support.annotation.DrawableRes
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import io.reactivex.android.schedulers.AndroidSchedulers
 
 class GridActivity : AppCompatActivity() {
 
@@ -16,6 +17,7 @@ class GridActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.grid_activity)
         getLikables(LikableApiProvider.get(), { callLocalLikes(this) })
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::showLikables, this::showError)
     }
 

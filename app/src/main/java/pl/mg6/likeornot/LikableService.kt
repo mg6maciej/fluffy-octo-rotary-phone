@@ -9,4 +9,4 @@ fun getLikables(api: LikableApi, callLocalLikes: () -> Single<LikableToStatus>):
 
 private fun toLikableList(list: List<LikableFromApi>, uuidToStatus: LikableToStatus) = list.map { it.toLikable(uuidToStatus) }
 
-private fun LikableFromApi.toLikable(uuidToStatus: LikableToStatus) = Likable(uuid, name, image.single(), uuidToStatus[uuid])
+private fun LikableFromApi.toLikable(uuidToStatus: LikableToStatus) = Likable(uuid, name, image?.single(), uuidToStatus[uuid])
