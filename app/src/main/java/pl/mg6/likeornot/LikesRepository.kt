@@ -7,11 +7,12 @@ import java.io.File
 typealias LikableToStatus = Map<String, Status>
 
 fun callLocalLikes(context: Context): Single<LikableToStatus> {
-    val likesFile = File(context.filesDir, "likes")
-    return Single.fromCallable { likesFile.readLines() }
+    return Single.fromCallable { readLikesFile(context) }
             .map(::toUuidToStatusMap)
             .onErrorReturnItem(emptyMap())
 }
+
+private fun readLikesFile(context: Context) = File(context.filesDir, "likes").readLines()
 
 private fun toUuidToStatusMap(lines: List<String>) = lines.associateBy(::extractUuid, ::extractStatus)
 
