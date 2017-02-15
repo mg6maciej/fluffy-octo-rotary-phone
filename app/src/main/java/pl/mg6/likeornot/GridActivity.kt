@@ -5,6 +5,7 @@ import android.support.annotation.DimenRes
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import io.reactivex.Single.just
 
 class GridActivity : AppCompatActivity() {
 
@@ -14,7 +15,7 @@ class GridActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.grid_activity)
-        getLikables(LikableApiProvider.get())
+        getLikables(LikableApiProvider.get(), { just(emptyMap()) })
                 .subscribe(this::showLikables, this::showError)
     }
 
