@@ -28,6 +28,10 @@ class GridPagerAdapter(private val gridItems: List<List<Likable>>, private val c
             name.text = likable.name
             val image = view.findViewById(R.id.likable_item_image) as ImageView
             Glide.with(container.context).load(likable.image).into(image)
+            likable.status?.let {
+                val status = view.findViewById(R.id.likable_item_status) as ImageView
+                status.setImageResource(it.imageId)
+            }
             likableToView[likable] = view
             view.tag = likable
         }

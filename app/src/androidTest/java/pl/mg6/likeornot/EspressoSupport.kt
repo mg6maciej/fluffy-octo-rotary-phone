@@ -35,7 +35,8 @@ private fun withImage(@DrawableRes imageId: Int): Matcher<View> {
     return object : BoundedMatcher<View, ImageView>(ImageView::class.java) {
 
         override fun matchesSafely(view: ImageView): Boolean {
-            val actualState = view.drawable.constantState
+            val drawable = view.drawable ?: return false
+            val actualState = drawable.constantState
             val expectedState = ContextCompat.getDrawable(view.context, imageId).constantState
             return actualState == expectedState
         }
