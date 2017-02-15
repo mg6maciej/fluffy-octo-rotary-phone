@@ -41,11 +41,12 @@ class GridPagerAdapter(private val gridItems: List<List<Likable>>, private val c
     override fun isViewFromObject(view: View, obj: Any) = view === obj
 
     override fun destroyItem(container: ViewGroup, position: Int, obj: Any) {
-        for (i in 0 until container.childCount) {
-            val likable = container.getChildAt(i).tag as Likable
+        val grid = obj as ViewGroup
+        for (i in 0 until grid.childCount) {
+            val likable = grid.getChildAt(i).tag as Likable
             likableToView.remove(likable)
         }
-        container.removeView(obj as View)
+        container.removeView(grid)
     }
 
     fun updateLikable(likable: Likable, @DrawableRes imageId: Int) {
