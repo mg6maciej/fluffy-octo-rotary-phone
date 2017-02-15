@@ -1,23 +1,12 @@
 package pl.mg6.likeornot
 
-import android.support.test.InstrumentationRegistry.getTargetContext
-import android.support.test.rule.ActivityTestRule
-import io.reactivex.Single.just
 import org.junit.Rule
 import org.junit.Test
-import java.io.File
 
 class GridLoadMultipleTest {
 
     @Rule @JvmField
-    val rule = object : ActivityTestRule<GridActivity>(GridActivity::class.java) {
-
-        override fun beforeActivityLaunched() {
-            LikableApiProvider.override = object : LikableApi {
-                override fun call() = just(listOf(michaelJacksonLikableFromApi, wayneRooneyLikableFromApi))
-            }
-        }
-    }
+    val rule = GridActivityTestRule()
 
     @Test
     fun shouldShowLikables() {
