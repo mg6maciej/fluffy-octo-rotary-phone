@@ -10,7 +10,7 @@ import com.elpassion.android.commons.espresso.click
 import com.elpassion.android.commons.espresso.isNotDisplayed
 import com.elpassion.android.commons.espresso.onId
 import org.hamcrest.core.AllOf.allOf
-import org.hamcrest.core.IsNot
+import org.hamcrest.core.IsNot.not
 import pl.mg6.likeornot.OnScreenMatcher.isOnScreenAtLeast
 
 data class LikableItemViewInteraction(val vi: ViewInteraction)
@@ -48,7 +48,7 @@ fun LikableItemViewInteraction.hasStatusOverlay() = apply {
 }
 
 fun LikableItemViewInteraction.doesntHaveStatusOverlay() = apply {
-    vi.check(matches(hasDescendant(allOf(withId(R.id.likable_item_status_overlay), IsNot.not(isDisplayed())))))
+    vi.check(matches(hasDescendant(allOf(withId(R.id.likable_item_status_overlay), not(isDisplayed())))))
 }
 
 fun LikableItemViewInteraction.selectReallyLike() = selectWithId(R.id.grid_overlay_really_like)
