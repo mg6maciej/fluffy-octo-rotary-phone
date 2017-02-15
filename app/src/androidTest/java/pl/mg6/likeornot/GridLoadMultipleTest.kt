@@ -1,7 +1,6 @@
 package pl.mg6.likeornot
 
 import android.support.test.rule.ActivityTestRule
-import com.elpassion.android.commons.espresso.onId
 import io.reactivex.Single.just
 import org.junit.Rule
 import org.junit.Test
