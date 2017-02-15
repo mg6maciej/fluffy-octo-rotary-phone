@@ -1,4 +1,4 @@
-package pl.mg6.likeornot
+package pl.mg6.likeornot.helpers
 
 import android.support.annotation.DrawableRes
 import android.support.annotation.IdRes
@@ -11,7 +11,8 @@ import com.elpassion.android.commons.espresso.isNotDisplayed
 import com.elpassion.android.commons.espresso.onId
 import org.hamcrest.core.AllOf.allOf
 import org.hamcrest.core.IsNot.not
-import pl.mg6.likeornot.OnScreenMatcher.isOnScreenAtLeast
+import pl.mg6.likeornot.R
+import pl.mg6.likeornot.helpers.OnScreenMatcher.isOnScreenAtLeast
 
 data class LikableItemViewInteraction(val vi: ViewInteraction)
 

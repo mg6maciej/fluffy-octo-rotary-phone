@@ -3,11 +3,12 @@ package pl.mg6.likeornot
 import com.elpassion.android.commons.espresso.onId
 import org.junit.Rule
 import org.junit.Test
+import pl.mg6.likeornot.helpers.*
 
 class GridLoadMoreThanNineTest {
 
     @Rule @JvmField
-    val rule = GridActivityTestRule(likablesFromApi)
+    val rule = GridActivityTestRule(likablesFromApi = likablesFromApi)
 
     @Test
     fun shouldShowFirstAndNinthLikable() {
@@ -34,6 +35,6 @@ class GridLoadMoreThanNineTest {
 
     companion object {
 
-        private val likablesFromApi by lazy { (1..20).map { LikableFromApi("uuid-$it", "Name $it", listOf("https://d93golxnkabrk.cloudfront.net/things/bb339a05-a904-11e1-9412-005056900141.jpg?w=200")) } }
+        private val likablesFromApi by lazy { (1..20).map { LikableFromApi("uuid-$it", "Name $it", null) } }
     }
 }

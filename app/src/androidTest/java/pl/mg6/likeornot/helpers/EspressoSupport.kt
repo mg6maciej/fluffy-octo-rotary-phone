@@ -1,4 +1,4 @@
-package pl.mg6.likeornot
+package pl.mg6.likeornot.helpers
 
 import android.support.annotation.DrawableRes
 import android.support.test.espresso.ViewInteraction

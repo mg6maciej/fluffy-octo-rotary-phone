@@ -1,4 +1,4 @@
-package pl.mg6.likeornot;
+package pl.mg6.likeornot.helpers;
 
 import android.content.Context;
 import android.graphics.Rect;

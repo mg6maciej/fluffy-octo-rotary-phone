@@ -2,6 +2,7 @@ package pl.mg6.likeornot
 
 import org.junit.Rule
 import org.junit.Test
+import pl.mg6.likeornot.helpers.*
 
 class GridShowStatusTest {
 

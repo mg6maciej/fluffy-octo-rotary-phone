@@ -3,11 +3,14 @@ package pl.mg6.likeornot
 import com.elpassion.android.commons.espresso.isNotDisplayed
 import org.junit.Rule
 import org.junit.Test
+import pl.mg6.likeornot.helpers.hasName
+import pl.mg6.likeornot.helpers.isNotDisplayed
+import pl.mg6.likeornot.helpers.onLikableItem
 
 class GridLoadTest {
 
     @Rule @JvmField
-    val rule = GridActivityTestRule(listOf(michaelJacksonLikableFromApi))
+    val rule = GridActivityTestRule(likablesFromApi = listOf(michaelJacksonLikableFromApi))
 
     @Test
     fun shouldShowLikable() {

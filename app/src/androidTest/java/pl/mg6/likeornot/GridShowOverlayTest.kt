@@ -1,8 +1,12 @@
 package pl.mg6.likeornot
 
-import com.elpassion.android.commons.espresso.*
+import com.elpassion.android.commons.espresso.hasText
+import com.elpassion.android.commons.espresso.isDisplayed
+import com.elpassion.android.commons.espresso.isNotDisplayed
+import com.elpassion.android.commons.espresso.onId
 import org.junit.Rule
 import org.junit.Test
+import pl.mg6.likeornot.helpers.*
 
 class GridShowOverlayTest {
 
