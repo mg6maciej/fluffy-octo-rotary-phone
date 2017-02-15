@@ -12,6 +12,7 @@ import android.support.v4.content.ContextCompat
 import android.view.View
 import android.widget.ImageView
 import com.elpassion.android.commons.espresso.click
+import com.elpassion.android.commons.espresso.isNotDisplayed
 import com.elpassion.android.commons.espresso.onId
 import org.hamcrest.Description
 import org.hamcrest.Matcher
@@ -19,54 +20,71 @@ import org.hamcrest.core.AllOf.allOf
 import org.hamcrest.core.IsNot.not
 import pl.mg6.likeornot.OnScreenMatcher.isOnScreenAtLeast
 
-fun onLikableItem(@IdRes id: Int): ViewInteraction {
-    return onView(allOf(withId(id), isOnScreenAtLeast(50)))
+data class LikableItemViewInteraction(val vi: ViewInteraction)
+
+fun onLikableItem(@IdRes id: Int): LikableItemViewInteraction {
+    return LikableItemViewInteraction(onView(allOf(withId(id), isOnScreenAtLeast(50))))
 }
 
-fun ViewInteraction.hasName(name: String): ViewInteraction {
-    return check(matches(hasDescendant(allOf(withId(R.id.likable_item_name), withText(name)))))
+fun LikableItemViewInteraction.click(): LikableItemViewInteraction {
+    vi.click()
+    return this
 }
 
-fun ViewInteraction.hasStatus(@DrawableRes imageId: Int): ViewInteraction {
-    return check(matches(hasDescendant(allOf(withId(R.id.likable_item_status), withImage(imageId)))))
+fun LikableItemViewInteraction.isNotDisplayed(): LikableItemViewInteraction {
+    vi.isNotDisplayed()
+    return this
 }
 
-fun ViewInteraction.hasNoStatus(): ViewInteraction {
-    return check(matches(hasDescendant(allOf(withId(R.id.likable_item_status), withNoImage()))))
+fun LikableItemViewInteraction.hasName(name: String): LikableItemViewInteraction {
+    vi.check(matches(hasDescendant(allOf(withId(R.id.likable_item_name), withText(name)))))
+    return this
 }
 
-fun ViewInteraction.hasStatusOverlay(): ViewInteraction {
-    return check(matches(hasDescendant(allOf(withId(R.id.likable_item_status_overlay), isDisplayed()))))
+fun LikableItemViewInteraction.hasStatus(@DrawableRes imageId: Int): LikableItemViewInteraction {
+    vi.check(matches(hasDescendant(allOf(withId(R.id.likable_item_status), withImage(imageId)))))
+    return this
 }
 
-fun ViewInteraction.doesntHaveStatusOverlay(): ViewInteraction {
-    return check(matches(hasDescendant(allOf(withId(R.id.likable_item_status_overlay), not(isDisplayed())))))
+fun LikableItemViewInteraction.hasNoStatus(): LikableItemViewInteraction {
+    vi.check(matches(hasDescendant(allOf(withId(R.id.likable_item_status), withNoImage()))))
+    return this
 }
 
-fun ViewInteraction.selectReallyLike(): ViewInteraction {
+fun LikableItemViewInteraction.hasStatusOverlay(): LikableItemViewInteraction {
+    vi.check(matches(hasDescendant(allOf(withId(R.id.likable_item_status_overlay), isDisplayed()))))
+    return this
+}
+
+fun LikableItemViewInteraction.doesntHaveStatusOverlay(): LikableItemViewInteraction {
+    vi.check(matches(hasDescendant(allOf(withId(R.id.likable_item_status_overlay), not(isDisplayed())))))
+    return this
+}
+
+fun LikableItemViewInteraction.selectReallyLike(): LikableItemViewInteraction {
     return selectWithId(R.id.grid_overlay_really_like)
 }
 
-fun ViewInteraction.selectLike(): ViewInteraction {
+fun LikableItemViewInteraction.selectLike(): LikableItemViewInteraction {
     return selectWithId(R.id.grid_overlay_like)
 }
 
-fun ViewInteraction.selectMeh(): ViewInteraction {
+fun LikableItemViewInteraction.selectMeh(): LikableItemViewInteraction {
     return selectWithId(R.id.grid_overlay_meh)
 }
 
-fun ViewInteraction.selectDontLike(): ViewInteraction {
+fun LikableItemViewInteraction.selectDontLike(): LikableItemViewInteraction {
     return selectWithId(R.id.grid_overlay_dont_like)
 }
 
-fun ViewInteraction.selectHate(): ViewInteraction {
+fun LikableItemViewInteraction.selectHate(): LikableItemViewInteraction {
     return selectWithId(R.id.grid_overlay_hate)
 }
 
-private fun ViewInteraction.selectWithId(viewId: Int): ViewInteraction {
-    val interaction = click()
+private fun LikableItemViewInteraction.selectWithId(viewId: Int): LikableItemViewInteraction {
+    vi.click()
     onId(viewId).click()
-    return interaction
+    return this
 }
 
 fun ViewInteraction.swipeLeft(): ViewInteraction {
