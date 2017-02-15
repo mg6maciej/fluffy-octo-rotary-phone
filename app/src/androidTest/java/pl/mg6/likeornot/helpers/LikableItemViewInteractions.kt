@@ -6,9 +6,11 @@ import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.ViewInteraction
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.*
+import android.view.View
 import com.elpassion.android.commons.espresso.click
 import com.elpassion.android.commons.espresso.isNotDisplayed
 import com.elpassion.android.commons.espresso.onId
+import org.hamcrest.Matcher
 import org.hamcrest.core.AllOf.allOf
 import org.hamcrest.core.IsNot.not
 import pl.mg6.likeornot.R
@@ -32,24 +34,23 @@ fun LikableItemViewInteraction.click() = apply { vi.click() }
 
 fun LikableItemViewInteraction.isNotDisplayed() = apply { vi.isNotDisplayed() }
 
-fun LikableItemViewInteraction.hasName(name: String) = apply {
-    vi.check(matches(hasDescendant(allOf(withId(R.id.likable_item_name), withText(name)))))
-}
+fun LikableItemViewInteraction.hasName(name: String)
+        = checkLikableItemElement(R.id.likable_item_name, withText(name))
 
-fun LikableItemViewInteraction.hasStatus(@DrawableRes imageId: Int) = apply {
-    vi.check(matches(hasDescendant(allOf(withId(R.id.likable_item_status), withImage(imageId)))))
-}
+fun LikableItemViewInteraction.hasStatus(@DrawableRes imageId: Int)
+        = checkLikableItemElement(R.id.likable_item_status, withImage(imageId))
 
-fun LikableItemViewInteraction.hasNoStatus() = apply {
-    vi.check(matches(hasDescendant(allOf(withId(R.id.likable_item_status), withNoImage()))))
-}
+fun LikableItemViewInteraction.hasNoStatus()
+        = checkLikableItemElement(R.id.likable_item_status, withNoImage())
 
-fun LikableItemViewInteraction.hasStatusOverlay() = apply {
-    vi.check(matches(hasDescendant(allOf(withId(R.id.likable_item_status_overlay), isDisplayed()))))
-}
+fun LikableItemViewInteraction.hasStatusOverlay()
+        = checkLikableItemElement(R.id.likable_item_status_overlay, isDisplayed())
 
-fun LikableItemViewInteraction.doesntHaveStatusOverlay() = apply {
-    vi.check(matches(hasDescendant(allOf(withId(R.id.likable_item_status_overlay), not(isDisplayed())))))
+fun LikableItemViewInteraction.doesntHaveStatusOverlay()
+        = checkLikableItemElement(R.id.likable_item_status_overlay, not(isDisplayed()))
+
+private fun LikableItemViewInteraction.checkLikableItemElement(@IdRes viewId: Int, matcher: Matcher<View>) = apply {
+    vi.check(matches(hasDescendant(allOf(withId(viewId), matcher))))
 }
 
 fun LikableItemViewInteraction.selectReallyLike() = selectWithId(R.id.grid_overlay_really_like)
