@@ -16,8 +16,16 @@ import pl.mg6.likeornot.OnScreenMatcher.isOnScreenAtLeast
 data class LikableItemViewInteraction(val vi: ViewInteraction)
 
 fun onLikableItem(@IdRes id: Int): LikableItemViewInteraction {
+    if (!legalIds.contains(id)) {
+        throw RuntimeException("Not a likable item with id: $id")
+    }
     return LikableItemViewInteraction(onView(allOf(withId(id), isOnScreenAtLeast(50))))
 }
+
+private val legalIds = intArrayOf(
+        R.id.likable_item_1, R.id.likable_item_2, R.id.likable_item_3,
+        R.id.likable_item_4, R.id.likable_item_5, R.id.likable_item_6,
+        R.id.likable_item_7, R.id.likable_item_8, R.id.likable_item_9)
 
 fun LikableItemViewInteraction.click(): LikableItemViewInteraction {
     vi.click()
