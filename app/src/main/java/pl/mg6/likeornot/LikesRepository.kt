@@ -1,6 +1,7 @@
 package pl.mg6.likeornot
 
 import android.content.Context
+import io.reactivex.Completable
 import io.reactivex.Single
 import java.io.File
 
@@ -19,3 +20,7 @@ private fun toUuidToStatusMap(lines: List<String>) = lines.associateBy(::extract
 private fun extractUuid(line: String) = line.substringBefore(' ')
 
 private fun extractStatus(line: String) = Status.valueOf(line.substringAfter(' '))
+
+fun addLocalLike(context: Context, likable: Likable, status: Status): Completable {
+    return Completable.fromCallable { File(context.filesDir, "likes").appendText("${likable.uuid} ${status}\n") }
+}

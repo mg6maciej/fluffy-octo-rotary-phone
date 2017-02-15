@@ -2,13 +2,14 @@ package pl.mg6.likeornot
 
 import android.os.Bundle
 import android.support.annotation.DimenRes
+import android.support.annotation.DrawableRes
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 
 class GridActivity : AppCompatActivity() {
 
-    private val overlayView by lazy { OverlayView(this, adapter::updateLikable) }
+    private val overlayView by lazy { OverlayView(this, this::updateLikable) }
     private lateinit var adapter: GridPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,8 +26,14 @@ class GridActivity : AppCompatActivity() {
                 .mapIndexed { index, likable -> index to likable }
                 .groupBy { it.first / 9 }
                 .map { it.value.map { it.second } }
-        adapter = GridPagerAdapter(gridItems, { overlayView.showLikable(it) })
+        adapter = GridPagerAdapter(gridItems, overlayView::showLikable)
         pager.adapter = adapter
+    }
+
+    private fun updateLikable(likable: Likable, @DrawableRes imageId: Int) {
+        adapter.updateLikable(likable, imageId)
+        addLocalLike(this, likable, Status.values().single { it.imageId == imageId })
+                .subscribe()
     }
 
     private fun calculatePageMargin(): Int {
