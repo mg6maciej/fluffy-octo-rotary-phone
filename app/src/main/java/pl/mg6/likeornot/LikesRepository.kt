@@ -13,7 +13,7 @@ fun callLocalLikes(context: Context): Single<LikableToStatus> {
             .onErrorReturnItem(emptyMap())
 }
 
-private fun readLikesFile(context: Context) = File(context.filesDir, "likes").readLines()
+private fun readLikesFile(context: Context) = likesFile(context).readLines()
 
 private fun toUuidToStatusMap(lines: List<String>) = lines.associateBy(::extractUuid, ::extractStatus)
 
@@ -22,5 +22,12 @@ private fun extractUuid(line: String) = line.substringBefore(' ')
 private fun extractStatus(line: String) = Status.valueOf(line.substringAfter(' '))
 
 fun addLocalLike(context: Context, likable: Likable, status: Status): Completable {
-    return Completable.fromCallable { File(context.filesDir, "likes").appendText("${likable.uuid} ${status}\n") }
+    return Completable.fromCallable { appendStatusToLikesFile(context, likable, status) }
 }
+
+private fun appendStatusToLikesFile(context: Context, likable: Likable, status: Status) {
+    val line = "${likable.uuid} ${status}\n"
+    likesFile(context).appendText(line)
+}
+
+private fun likesFile(context: Context) = File(context.filesDir, "likes")
