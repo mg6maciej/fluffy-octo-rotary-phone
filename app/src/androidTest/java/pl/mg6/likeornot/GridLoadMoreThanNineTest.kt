@@ -2,7 +2,6 @@ package pl.mg6.likeornot
 
 import android.support.test.espresso.action.ViewActions.swipeLeft
 import android.support.test.espresso.action.ViewActions.swipeRight
-import com.elpassion.android.commons.espresso.click
 import com.elpassion.android.commons.espresso.onId
 import org.junit.Rule
 import org.junit.Test
@@ -26,8 +25,7 @@ class GridLoadMoreThanNineTest {
 
     @Test
     fun shouldShowStatusAndOverlayAfterComingBack() {
-        onLikableItem(R.id.likable_item_1).click()
-        onId(R.id.grid_overlay_dont_like).click()
+        onLikableItem(R.id.likable_item_1).selectDontLike()
         onId(R.id.grid_pager).perform(swipeLeft())
         onId(R.id.grid_pager).perform(swipeLeft())
         onId(R.id.grid_pager).perform(swipeRight())

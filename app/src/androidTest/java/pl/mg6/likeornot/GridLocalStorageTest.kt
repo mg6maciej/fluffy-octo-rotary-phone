@@ -1,7 +1,5 @@
 package pl.mg6.likeornot
 
-import com.elpassion.android.commons.espresso.click
-import com.elpassion.android.commons.espresso.onId
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
@@ -18,8 +16,7 @@ class GridLocalStorageTest {
 
     @Test
     fun shouldStoreLikableStatusLocally() {
-        onLikableItem(R.id.likable_item_2).click()
-        onId(R.id.grid_overlay_meh).click()
+        onLikableItem(R.id.likable_item_2).selectMeh()
         assertEquals(
                 "${michaelJacksonLikableFromApi.uuid} LIKE\n${wayneRooneyLikableFromApi.uuid} MEH\n",
                 rule.likesFile.readText())

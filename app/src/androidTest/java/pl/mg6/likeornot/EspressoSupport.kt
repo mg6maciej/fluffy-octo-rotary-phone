@@ -10,6 +10,8 @@ import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.v4.content.ContextCompat
 import android.view.View
 import android.widget.ImageView
+import com.elpassion.android.commons.espresso.click
+import com.elpassion.android.commons.espresso.onId
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.core.AllOf.allOf
@@ -38,6 +40,32 @@ fun ViewInteraction.hasStatusOverlay(): ViewInteraction {
 
 fun ViewInteraction.doesntHaveStatusOverlay(): ViewInteraction {
     return check(matches(hasDescendant(allOf(withId(R.id.likable_item_status_overlay), not(isDisplayed())))))
+}
+
+fun ViewInteraction.selectReallyLike(): ViewInteraction {
+    return selectWithId(R.id.grid_overlay_really_like)
+}
+
+fun ViewInteraction.selectLike(): ViewInteraction {
+    return selectWithId(R.id.grid_overlay_like)
+}
+
+fun ViewInteraction.selectMeh(): ViewInteraction {
+    return selectWithId(R.id.grid_overlay_meh)
+}
+
+fun ViewInteraction.selectDontLike(): ViewInteraction {
+    return selectWithId(R.id.grid_overlay_dont_like)
+}
+
+fun ViewInteraction.selectHate(): ViewInteraction {
+    return selectWithId(R.id.grid_overlay_hate)
+}
+
+private fun ViewInteraction.selectWithId(viewId: Int): ViewInteraction {
+    val interaction = click()
+    onId(viewId).click()
+    return interaction
 }
 
 private fun withImage(@DrawableRes imageId: Int): Matcher<View> {
