@@ -2,9 +2,7 @@
 <pl.mg6.likeornot.view.SquareFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:paddingBottom="@dimen/grid_pager_padding"
-    android:paddingTop="@dimen/grid_pager_padding">
+    android:layout_gravity="center">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/grid_pager"

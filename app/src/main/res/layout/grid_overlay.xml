@@ -4,8 +4,7 @@
     android:id="@+id/grid_overlay"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/grid_pager_padding"
-    android:paddingRight="@dimen/grid_pager_padding"
+    android:padding="@dimen/grid_pager_padding"
     android:visibility="gone"
     tools:showIn="@layout/grid_activity"
     tools:visibility="visible">

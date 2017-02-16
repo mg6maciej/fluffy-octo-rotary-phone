@@ -4,8 +4,7 @@
     android:id="@+id/grid_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/grid_pager_padding"
-    android:paddingRight="@dimen/grid_pager_padding">
+    android:padding="@dimen/grid_pager_padding">
 
     <include
         android:id="@+id/likable_item_1"
