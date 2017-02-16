@@ -1,6 +1,5 @@
 package pl.mg6.likeornot
 
-import com.elpassion.android.commons.espresso.isNotDisplayed
 import org.junit.Rule
 import org.junit.Test
 import pl.mg6.likeornot.helpers.hasName
