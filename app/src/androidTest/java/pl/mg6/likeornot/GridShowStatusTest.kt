@@ -23,7 +23,7 @@ class GridShowStatusTest {
 
     @Test
     fun shouldNotShowStatusAtFirst() {
-        onLikableItem(R.id.likable_item_1).hasNoStatus()
+        onLikableItem(R.id.likable_item_1).doesNotHaveStatus()
     }
 
     @Test
@@ -34,6 +34,6 @@ class GridShowStatusTest {
 
     @Test
     fun shouldNotShowStatusOverlayAtFirst() {
-        onLikableItem(R.id.likable_item_1).doesntHaveStatusOverlay()
+        onLikableItem(R.id.likable_item_1).doesNotHaveStatusOverlay()
     }
 }

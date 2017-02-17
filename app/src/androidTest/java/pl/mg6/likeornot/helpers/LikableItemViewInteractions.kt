@@ -40,13 +40,13 @@ fun LikableItemViewInteraction.hasName(name: String)
 fun LikableItemViewInteraction.hasStatus(@DrawableRes imageId: Int)
         = checkLikableItemElement(R.id.likable_item_status, withImage(imageId))
 
-fun LikableItemViewInteraction.hasNoStatus()
+fun LikableItemViewInteraction.doesNotHaveStatus()
         = checkLikableItemElement(R.id.likable_item_status, withNoImage())
 
 fun LikableItemViewInteraction.hasStatusOverlay()
         = checkLikableItemElement(R.id.likable_item_status_overlay, isDisplayed())
 
-fun LikableItemViewInteraction.doesntHaveStatusOverlay()
+fun LikableItemViewInteraction.doesNotHaveStatusOverlay()
         = checkLikableItemElement(R.id.likable_item_status_overlay, not(isDisplayed()))
 
 private fun LikableItemViewInteraction.checkLikableItemElement(@IdRes viewId: Int, matcher: Matcher<View>) = apply {
