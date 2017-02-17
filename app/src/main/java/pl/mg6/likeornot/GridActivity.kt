@@ -18,7 +18,7 @@ class GridActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.grid_activity)
-        getLikables(LikableApiProvider.get(), { callLocalLikes(this).subscribeOn(Schedulers.io()) })
+        getLikables(LikableApiProvider.get(), { loadLocalLikes(this).subscribeOn(Schedulers.io()) })
                 .map { it.batch(9) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::showLikables, this::showError)
@@ -33,7 +33,7 @@ class GridActivity : AppCompatActivity() {
 
     private fun updateLikable(likable: Likable, @DrawableRes imageId: Int) {
         adapter.updateLikable(likable, imageId)
-        addLocalLike(this, likable, Status.values().single { it.imageId == imageId })
+        saveLocalLike(this, likable, Status.values().single { it.imageId == imageId })
                 .subscribeOn(Schedulers.io())
                 .subscribe()
     }
