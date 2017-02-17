@@ -7,7 +7,7 @@ fun <T> List<T>.batch(chunkSize: Int): List<List<T>> {
     val list = mutableListOf<MutableList<T>>()
     for (i in 0 until size) {
         if (i % chunkSize == 0) {
-            list.add(mutableListOf())
+            list.add(ArrayList(chunkSize))
         }
         list.last().add(get(i))
     }
