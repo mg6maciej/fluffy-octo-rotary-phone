@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import io.reactivex.android.schedulers.AndroidSchedulers
+import pl.mg6.likeornot.commons.batch
 
 class GridActivity : AppCompatActivity() {
 
@@ -24,10 +25,7 @@ class GridActivity : AppCompatActivity() {
     private fun showLikables(likables: List<Likable>) {
         val pager = findViewById(R.id.grid_pager) as ViewPager
         pager.pageMargin = calculatePageMargin()
-        val gridItems = likables
-                .mapIndexed { index, likable -> index to likable }
-                .groupBy { it.first / 9 }
-                .map { it.value.map { it.second } }
+        val gridItems = likables.batch(9)
         adapter = GridPagerAdapter(gridItems, overlayView::showLikable)
         pager.adapter = adapter
     }
