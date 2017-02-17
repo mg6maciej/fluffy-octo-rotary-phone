@@ -18,14 +18,14 @@ class GridActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.grid_activity)
         getLikables(LikableApiProvider.get(), { callLocalLikes(this) })
+                .map { it.batch(9) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::showLikables, this::showError)
     }
 
-    private fun showLikables(likables: List<Likable>) {
+    private fun showLikables(gridItems: List<List<Likable>>) {
         val pager = findViewById(R.id.grid_pager) as ViewPager
         pager.pageMargin = calculatePageMargin()
-        val gridItems = likables.batch(9)
         adapter = GridPagerAdapter(gridItems, overlayView::showLikable)
         pager.adapter = adapter
     }
