@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="@dimen/likable_items_inner_margin">
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:padding="@dimen/likable_items_inner_margin"
+    tools:layout_height="100dp"
+    tools:layout_width="100dp">
 
     <ImageView
         android:id="@+id/likable_item_image"
