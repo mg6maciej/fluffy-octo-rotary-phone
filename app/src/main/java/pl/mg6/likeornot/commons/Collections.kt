@@ -4,7 +4,8 @@ fun <T> List<T>.batch(chunkSize: Int): List<List<T>> {
     if (chunkSize <= 0) {
         throw IllegalArgumentException("chunkSize must be greater than 0")
     }
-    val list = mutableListOf<MutableList<T>>()
+    val capacity = (size + chunkSize - 1) / chunkSize
+    val list = ArrayList<ArrayList<T>>(capacity)
     for (i in 0 until size) {
         if (i % chunkSize == 0) {
             list.add(ArrayList(chunkSize))
