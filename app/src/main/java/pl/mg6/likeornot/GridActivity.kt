@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import pl.mg6.likeornot.commons.batch
 
 class GridActivity : AppCompatActivity() {
@@ -17,7 +18,7 @@ class GridActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.grid_activity)
-        getLikables(LikableApiProvider.get(), { callLocalLikes(this) })
+        getLikables(LikableApiProvider.get(), { callLocalLikes(this).subscribeOn(Schedulers.io()) })
                 .map { it.batch(9) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::showLikables, this::showError)
@@ -33,6 +34,7 @@ class GridActivity : AppCompatActivity() {
     private fun updateLikable(likable: Likable, @DrawableRes imageId: Int) {
         adapter.updateLikable(likable, imageId)
         addLocalLike(this, likable, Status.values().single { it.imageId == imageId })
+                .subscribeOn(Schedulers.io())
                 .subscribe()
     }
 
