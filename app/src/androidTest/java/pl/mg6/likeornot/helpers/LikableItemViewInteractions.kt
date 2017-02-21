@@ -16,7 +16,46 @@ import org.hamcrest.core.IsNot.not
 import pl.mg6.likeornot.R
 import pl.mg6.likeornot.helpers.OnScreenMatcher.isOnScreenAtLeast
 
-data class LikableItemViewInteraction(val vi: ViewInteraction)
+class LikableItemViewInteraction(val vi: ViewInteraction) {
+
+    fun click() = apply { vi.click() }
+
+    fun isNotDisplayed() = apply { vi.isNotDisplayed() }
+
+    fun hasName(name: String)
+            = checkLikableItemElement(R.id.likable_item_name, withText(name))
+
+    fun hasStatus(@DrawableRes imageId: Int)
+            = checkLikableItemElement(R.id.likable_item_status, withImage(imageId))
+
+    fun doesNotHaveStatus()
+            = checkLikableItemElement(R.id.likable_item_status, withNoImage())
+
+    fun hasStatusOverlay()
+            = checkLikableItemElement(R.id.likable_item_status_overlay, isDisplayed())
+
+    fun doesNotHaveStatusOverlay()
+            = checkLikableItemElement(R.id.likable_item_status_overlay, not(isDisplayed()))
+
+    private fun checkLikableItemElement(@IdRes viewId: Int, matcher: Matcher<View>) = apply {
+        vi.check(matches(hasDescendant(allOf(withId(viewId), matcher))))
+    }
+
+    fun selectReallyLike() = selectWithId(R.id.grid_overlay_really_like)
+
+    fun selectLike() = selectWithId(R.id.grid_overlay_like)
+
+    fun selectMeh() = selectWithId(R.id.grid_overlay_meh)
+
+    fun selectDontLike() = selectWithId(R.id.grid_overlay_dont_like)
+
+    fun selectHate() = selectWithId(R.id.grid_overlay_hate)
+
+    private fun selectWithId(@IdRes viewId: Int) = apply {
+        vi.click()
+        onId(viewId).click()
+    }
+}
 
 fun onLikableItem(@IdRes id: Int): LikableItemViewInteraction {
     if (!legalIds.contains(id)) {
@@ -29,41 +68,3 @@ private val legalIds = intArrayOf(
         R.id.likable_item_1, R.id.likable_item_2, R.id.likable_item_3,
         R.id.likable_item_4, R.id.likable_item_5, R.id.likable_item_6,
         R.id.likable_item_7, R.id.likable_item_8, R.id.likable_item_9)
-
-fun LikableItemViewInteraction.click() = apply { vi.click() }
-
-fun LikableItemViewInteraction.isNotDisplayed() = apply { vi.isNotDisplayed() }
-
-fun LikableItemViewInteraction.hasName(name: String)
-        = checkLikableItemElement(R.id.likable_item_name, withText(name))
-
-fun LikableItemViewInteraction.hasStatus(@DrawableRes imageId: Int)
-        = checkLikableItemElement(R.id.likable_item_status, withImage(imageId))
-
-fun LikableItemViewInteraction.doesNotHaveStatus()
-        = checkLikableItemElement(R.id.likable_item_status, withNoImage())
-
-fun LikableItemViewInteraction.hasStatusOverlay()
-        = checkLikableItemElement(R.id.likable_item_status_overlay, isDisplayed())
-
-fun LikableItemViewInteraction.doesNotHaveStatusOverlay()
-        = checkLikableItemElement(R.id.likable_item_status_overlay, not(isDisplayed()))
-
-private fun LikableItemViewInteraction.checkLikableItemElement(@IdRes viewId: Int, matcher: Matcher<View>) = apply {
-    vi.check(matches(hasDescendant(allOf(withId(viewId), matcher))))
-}
-
-fun LikableItemViewInteraction.selectReallyLike() = selectWithId(R.id.grid_overlay_really_like)
-
-fun LikableItemViewInteraction.selectLike() = selectWithId(R.id.grid_overlay_like)
-
-fun LikableItemViewInteraction.selectMeh() = selectWithId(R.id.grid_overlay_meh)
-
-fun LikableItemViewInteraction.selectDontLike() = selectWithId(R.id.grid_overlay_dont_like)
-
-fun LikableItemViewInteraction.selectHate() = selectWithId(R.id.grid_overlay_hate)
-
-private fun LikableItemViewInteraction.selectWithId(@IdRes viewId: Int) = apply {
-    vi.click()
-    onId(viewId).click()
-}

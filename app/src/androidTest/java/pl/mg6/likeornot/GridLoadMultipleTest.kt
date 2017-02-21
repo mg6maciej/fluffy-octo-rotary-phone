@@ -2,7 +2,6 @@ package pl.mg6.likeornot
 
 import org.junit.Rule
 import org.junit.Test
-import pl.mg6.likeornot.helpers.hasName
 import pl.mg6.likeornot.helpers.onLikableItem
 
 class GridLoadMultipleTest {

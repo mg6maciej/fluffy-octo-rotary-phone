@@ -3,10 +3,7 @@ package pl.mg6.likeornot
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
-import pl.mg6.likeornot.helpers.hasStatus
-import pl.mg6.likeornot.helpers.hasStatusOverlay
 import pl.mg6.likeornot.helpers.onLikableItem
-import pl.mg6.likeornot.helpers.selectMeh
 
 class GridLocalStorageTest {
 
