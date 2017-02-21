@@ -6,7 +6,7 @@ import org.junit.Test
 class BatchTest {
 
     @Test
-    fun shouldReturnEmptyList() {
+    fun shouldReturnListOfLists() {
         assertEquals(emptyList<List<Unit>>(), emptyList<Unit>().batch(6))
         assertEquals(listOf(listOf(Unit)), listOf(Unit).batch(6))
         assertEquals(listOf(listOf(0), listOf(1)), listOf(0, 1).batch(1))
