@@ -1,5 +1,6 @@
 package pl.mg6.likeornot
 
+import android.test.FlakyTest
 import com.elpassion.android.commons.espresso.onId
 import org.junit.Rule
 import org.junit.Test
@@ -17,12 +18,14 @@ class GridLoadMoreThanNineTest {
     }
 
     @Test
+    @FlakyTest(tolerance = 3)
     fun shouldShowTenthLikableAfterSwipe() {
         onId(R.id.grid_pager).swipeLeft()
         onLikableItem(R.id.likable_item_1).hasName("Name 10")
     }
 
     @Test
+    @FlakyTest(tolerance = 3)
     fun shouldShowStatusAndOverlayAfterComingBack() {
         onLikableItem(R.id.likable_item_1).selectDontLike()
         onId(R.id.grid_pager)
