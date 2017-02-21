@@ -1,10 +1,12 @@
 package pl.mg6.likeornot
 
-import android.test.FlakyTest
+import android.os.SystemClock
 import com.elpassion.android.commons.espresso.onId
 import org.junit.Rule
 import org.junit.Test
-import pl.mg6.likeornot.helpers.*
+import pl.mg6.likeornot.helpers.onLikableItem
+import pl.mg6.likeornot.helpers.swipeLeft
+import pl.mg6.likeornot.helpers.swipeRight
 
 class GridLoadMoreThanNineTest {
 
@@ -18,19 +20,19 @@ class GridLoadMoreThanNineTest {
     }
 
     @Test
-    @FlakyTest(tolerance = 3)
     fun shouldShowTenthLikableAfterSwipe() {
         onId(R.id.grid_pager).swipeLeft()
+        SystemClock.sleep(100)
         onLikableItem(R.id.likable_item_1).hasName("Name 10")
     }
 
     @Test
-    @FlakyTest(tolerance = 3)
     fun shouldShowStatusAndOverlayAfterComingBack() {
         onLikableItem(R.id.likable_item_1).selectDontLike()
         onId(R.id.grid_pager)
                 .swipeLeft().swipeLeft()
                 .swipeRight().swipeRight()
+        SystemClock.sleep(100)
         onLikableItem(R.id.likable_item_1)
                 .hasStatus(R.drawable.dont_like)
                 .hasStatusOverlay()
