@@ -6,6 +6,8 @@ import android.support.annotation.DrawableRes
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import pl.mg6.likeornot.commons.batch
@@ -21,6 +23,8 @@ class GridActivity : AppCompatActivity() {
         getLikables(LikableApiProvider.get(), { loadLocalLikes(this).subscribeOn(Schedulers.io()) })
                 .map { it.batch(9) }
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { showLoader() }
+                .doFinally { hideLoader() }
                 .subscribe(this::showLikables, this::showError)
     }
 
@@ -43,6 +47,14 @@ class GridActivity : AppCompatActivity() {
     }
 
     private val @receiver:DimenRes Int.pixelSize get() = resources.getDimensionPixelSize(this)
+
+    private fun showLoader() {
+        findViewById(R.id.loader).visibility = VISIBLE
+    }
+
+    private fun hideLoader() {
+        findViewById(R.id.loader).visibility = GONE
+    }
 
     private fun showError(error: Throwable) {
         Log.e("tag", "", error)
