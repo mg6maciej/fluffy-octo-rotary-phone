@@ -3,7 +3,6 @@ package pl.mg6.likeornot.helpers
 import android.support.annotation.DrawableRes
 import android.support.annotation.IdRes
 import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.ViewInteraction
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.*
 import android.view.View
@@ -15,12 +14,15 @@ import org.hamcrest.core.AllOf.allOf
 import org.hamcrest.core.IsNot.not
 import pl.mg6.likeornot.R
 import pl.mg6.likeornot.helpers.OnScreenMatcher.isOnScreenAtLeast
+import kotlin.LazyThreadSafetyMode.NONE
 
-class LikableItemViewInteraction(val vi: ViewInteraction) {
+class LikableItemViewInteraction(@IdRes private val id: Int) {
 
-    fun click() = apply { vi.click() }
+    private val likableItemMatcher by lazy(NONE) { allOf(withId(id), isOnScreenAtLeast(50)) }
 
-    fun isNotDisplayed() = apply { vi.isNotDisplayed() }
+    fun click() = apply { onView(likableItemMatcher).click() }
+
+    fun isNotDisplayed() = apply { onView(likableItemMatcher).isNotDisplayed() }
 
     fun hasName(name: String)
             = checkLikableItemElement(R.id.likable_item_name, withText(name))
@@ -38,7 +40,7 @@ class LikableItemViewInteraction(val vi: ViewInteraction) {
             = checkLikableItemElement(R.id.likable_item_status_overlay, not(isDisplayed()))
 
     private fun checkLikableItemElement(@IdRes viewId: Int, matcher: Matcher<View>) = apply {
-        vi.check(matches(hasDescendant(allOf(withId(viewId), matcher))))
+        onView(allOf(withId(viewId), isDescendantOfA(likableItemMatcher))).check(matches(matcher))
     }
 
     fun selectReallyLike() = selectWithId(R.id.grid_overlay_really_like)
@@ -52,7 +54,7 @@ class LikableItemViewInteraction(val vi: ViewInteraction) {
     fun selectHate() = selectWithId(R.id.grid_overlay_hate)
 
     private fun selectWithId(@IdRes viewId: Int) = apply {
-        vi.click()
+        click()
         onId(viewId).click()
     }
 }
@@ -61,7 +63,7 @@ fun onLikableItem(@IdRes id: Int): LikableItemViewInteraction {
     if (!legalIds.contains(id)) {
         throw RuntimeException("Not a likable item with id: $id")
     }
-    return LikableItemViewInteraction(onView(allOf(withId(id), isOnScreenAtLeast(50))))
+    return LikableItemViewInteraction(id)
 }
 
 private val legalIds = intArrayOf(
