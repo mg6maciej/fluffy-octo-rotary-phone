@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="0dp"
     android:layout_height="0dp"
-    android:padding="@dimen/likable_items_inner_margin"
     tools:layout_height="100dp"
     tools:layout_width="100dp">
 
