@@ -1,9 +1,11 @@
 package pl.mg6.likeornot
 
 import com.elpassion.android.commons.espresso.onId
+import com.elpassion.android.commons.espresso.swipeLeft
+import com.elpassion.android.commons.espresso.swipeRight
 import org.junit.Rule
 import org.junit.Test
-import pl.mg6.likeornot.helpers.*
+import pl.mg6.likeornot.helpers.onLikableItem
 
 class GridLoadMoreThanNineTest {
 

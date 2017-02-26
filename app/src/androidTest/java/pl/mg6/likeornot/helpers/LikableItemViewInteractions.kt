@@ -8,6 +8,8 @@ import android.support.test.espresso.matcher.ViewMatchers.*
 import android.view.View
 import com.elpassion.android.commons.espresso.click
 import com.elpassion.android.commons.espresso.isNotDisplayed
+import com.elpassion.android.commons.espresso.matchers.withAnyImage
+import com.elpassion.android.commons.espresso.matchers.withImage
 import com.elpassion.android.commons.espresso.onId
 import org.hamcrest.Matcher
 import org.hamcrest.core.AllOf.allOf
@@ -31,7 +33,7 @@ class LikableItemViewInteraction(@IdRes private val id: Int) {
             = checkLikableItemElement(R.id.likable_item_status, withImage(imageId))
 
     fun doesNotHaveStatus()
-            = checkLikableItemElement(R.id.likable_item_status, withNoImage())
+            = checkLikableItemElement(R.id.likable_item_status, not(withAnyImage()))
 
     fun hasStatusOverlay()
             = checkLikableItemElement(R.id.likable_item_status_overlay, isDisplayed())
