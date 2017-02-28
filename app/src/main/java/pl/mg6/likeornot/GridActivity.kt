@@ -6,6 +6,7 @@ import android.support.annotation.DrawableRes
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import com.google.firebase.crash.FirebaseCrash
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -47,7 +48,9 @@ class GridActivity : AppCompatActivity() {
     private val @receiver:DimenRes Int.pixelSize get() = resources.getDimensionPixelSize(this)
 
     private fun showError(error: Throwable) {
-        Log.e("tag", "", error)
+        Log.e("GridActivity", "Cannot show likables!", error)
+        FirebaseCrash.log("Cannot show likables!")
+        FirebaseCrash.report(error)
     }
 
     override fun onDestroy() {
