@@ -22,6 +22,7 @@ before_script:
   - script/run_emulator
 
 after_success:
+  - script/upload_apk_crashlytics
   - script/upload_coverage_codecov
   - script/upload_coverage_coveralls
 

@@ -79,3 +79,11 @@ dependencies {
     testCompile 'com.nhaarman:mockito-kotlin:1.3.0'
     testCompile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 }
+
+afterEvaluate {
+    if (FABRIC_API_SECRET) {
+        ant.propertyfile(file: "fabric.properties") {
+            entry(key: "apiSecret", value: FABRIC_API_SECRET)
+        }
+    }
+}
