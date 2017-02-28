@@ -18,7 +18,7 @@ class OverlayView(private val activity: Activity, private val clickCallback: (Li
         Glide.with(activity).load(likable.image).into(image)
         val handleClick: (View) -> Unit = {
             overlay.visibility = View.GONE
-            clickCallback.invoke(likable, idToImage[it.id]!!)
+            clickCallback.invoke(likable, idToImage.getValue(it.id))
         }
         overlay.findViewById(R.id.grid_overlay_really_like).setOnClickListener(handleClick)
         overlay.findViewById(R.id.grid_overlay_like).setOnClickListener(handleClick)
