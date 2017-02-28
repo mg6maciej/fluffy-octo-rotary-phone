@@ -1,10 +1,13 @@
 buildscript {
     repositories {
         jcenter()
+        mavenCentral()
+        maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {
         classpath 'com.trickyandroid:jacoco-everywhere:0.2.1'
         classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.5.0-x'
+        classpath 'io.fabric.tools:gradle:1.22.1'
     }
 }
 
@@ -12,6 +15,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'jacoco-everywhere'
 apply plugin: 'com.github.kt3k.coveralls'
+apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 25
@@ -61,6 +65,9 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.google.firebase:firebase-core:9.8.0'
     compile 'com.google.firebase:firebase-crash:9.8.0'
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.6@aar') {
+        transitive = true;
+    }
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2') {
         exclude group: 'com.android.support', module: 'support-annotations'
     }

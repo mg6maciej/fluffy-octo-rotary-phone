@@ -2,6 +2,7 @@ buildscript {
     ext.kotlin_version = '1.1.0-rc-91'
     repositories {
         jcenter()
+        mavenCentral()
         maven { url 'http://dl.bintray.com/kotlin/kotlin-eap-1.1' }
     }
     dependencies {
@@ -14,7 +15,9 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        mavenCentral()
         maven { url 'http://dl.bintray.com/kotlin/kotlin-eap-1.1' }
+        maven { url 'https://maven.fabric.io/public' }
     }
 }
 
