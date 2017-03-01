@@ -14,6 +14,8 @@ NEXT_BUGFIX=$((  ${ARR[2]} + 1  ))
 NEXT_VERSION_NAME="${ARR[0]}.${ARR[1]}.${NEXT_BUGFIX}-SNAPSHOT"
 
 git stash
+git checkout master
+git pull
 git checkout develop
 git pull
 git checkout -b release/$VERSION_NAME
@@ -25,7 +27,6 @@ sed -iE \
 
 git commit -a -m "Update version in build.gradle to $VERSION_NAME."
 git checkout master
-git pull
 git merge --no-ff --no-edit release/$VERSION_NAME
 git push
 git tag $VERSION_NAME

@@ -24,8 +24,8 @@ android {
         applicationId "pl.mg6.likeornot"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 1000002
-        versionName "1.0.1"
+        versionCode 1000004
+        versionName "1.0.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -35,6 +35,8 @@ android {
         }
         debug {
             testCoverageEnabled true
+            ext.betaDistributionGroupAliases = 'testers'
+            ext.betaDistributionReleaseNotesFilePath = "crashlytics_release_notes.txt"
         }
     }
     sourceSets {
