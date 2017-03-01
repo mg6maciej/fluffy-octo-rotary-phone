@@ -5,12 +5,10 @@ import android.support.annotation.DimenRes
 import android.support.annotation.DrawableRes
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
-import com.crashlytics.android.Crashlytics
-import com.google.firebase.crash.FirebaseCrash
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import pl.mg6.likeornot.ErrorLogger.logError
 import pl.mg6.likeornot.commons.batch
 
 class GridActivity : AppCompatActivity() {
@@ -49,10 +47,7 @@ class GridActivity : AppCompatActivity() {
     private val @receiver:DimenRes Int.pixelSize get() = resources.getDimensionPixelSize(this)
 
     private fun showError(error: Throwable) {
-        Log.e("GridActivity", "Cannot show likables!", error)
-        FirebaseCrash.log("Cannot show likables!")
-        FirebaseCrash.report(error)
-        Crashlytics.logException(error)
+        logError("GridActivity", "Cannot show likables!", error)
     }
 
     override fun onDestroy() {
