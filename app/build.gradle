@@ -35,6 +35,8 @@ android {
         }
         debug {
             testCoverageEnabled true
+            ext.betaDistributionGroupAliases = 'testers'
+            ext.betaDistributionReleaseNotesFilePath = "crashlytics_release_notes.txt"
         }
     }
     sourceSets {
