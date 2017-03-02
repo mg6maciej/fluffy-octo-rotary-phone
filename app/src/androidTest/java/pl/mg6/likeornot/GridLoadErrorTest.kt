@@ -1,6 +1,8 @@
 package pl.mg6.likeornot
 
 import android.support.test.rule.ActivityTestRule
+import com.elpassion.android.commons.espresso.isDisplayed
+import com.elpassion.android.commons.espresso.onId
 import io.reactivex.Single
 import io.reactivex.Single.error
 import org.junit.Assert
@@ -35,5 +37,10 @@ class GridLoadErrorTest {
     @Test
     fun shouldCallLogError() {
         Assert.assertTrue(called)
+    }
+
+    @Test
+    fun shouldShowErrorMessage() {
+        onId(R.id.grid_load_error).isDisplayed()
     }
 }
