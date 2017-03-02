@@ -40,7 +40,7 @@ class GridLoadErrorTest {
     }
 
     @Test
-    fun shouldShowErrorMessage() {
+    fun shouldShowLoadErrorMessage() {
         onId(R.id.grid_load_error).isDisplayed()
     }
 }
