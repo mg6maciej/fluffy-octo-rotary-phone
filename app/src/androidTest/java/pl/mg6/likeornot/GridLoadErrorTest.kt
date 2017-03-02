@@ -3,22 +3,24 @@ package pl.mg6.likeornot
 import android.support.test.rule.ActivityTestRule
 import com.elpassion.android.commons.espresso.isDisplayed
 import com.elpassion.android.commons.espresso.onId
+import com.nhaarman.mockito_kotlin.any
+import com.nhaarman.mockito_kotlin.eq
+import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockito_kotlin.verify
 import io.reactivex.Single
 import io.reactivex.Single.error
-import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
 
 class GridLoadErrorTest {
 
-    private var called = false
-    private val logErrorSpy: LogErrorFunc = { _, _, _ -> called = true }
+    private val logErrorMock: LogErrorFunc = mock()
 
     @Rule @JvmField
     val rule = object : ActivityTestRule<GridActivity>(GridActivity::class.java) {
 
         override fun beforeActivityLaunched() {
-            ErrorLogger.override = logErrorSpy
+            ErrorLogger.override = logErrorMock
             RetrofitProvider.override = (GridActivityTestRule)::throwNoInternetInTests
             LikableApiProvider.override = object : LikableApi {
                 override fun call(): Single<List<LikableFromApi>> {
@@ -36,7 +38,7 @@ class GridLoadErrorTest {
 
     @Test
     fun shouldCallLogError() {
-        Assert.assertTrue(called)
+        verify(logErrorMock).invoke(eq("GridActivity"), eq("Cannot show likables!"), any())
     }
 
     @Test
