@@ -5,6 +5,7 @@ import android.support.annotation.DimenRes
 import android.support.annotation.DrawableRes
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
+import android.view.View.VISIBLE
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -48,6 +49,7 @@ class GridActivity : AppCompatActivity() {
 
     private fun showError(error: Throwable) {
         logError("GridActivity", "Cannot show likables!", error)
+        findViewById(R.id.grid_load_error).visibility = VISIBLE
     }
 
     override fun onDestroy() {
