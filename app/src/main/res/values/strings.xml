@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Like or Not</string>
+    <string name="load_error">Cannot load likables!</string>
 </resources>

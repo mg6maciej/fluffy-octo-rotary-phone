@@ -2,6 +2,7 @@ package pl.mg6.likeornot
 
 import android.support.test.InstrumentationRegistry.getTargetContext
 import android.support.test.rule.ActivityTestRule
+import android.util.Log
 import io.reactivex.Single
 import io.reactivex.Single.just
 import java.io.File
@@ -14,6 +15,7 @@ class GridActivityTestRule(
     val likesFile by lazy { File(getTargetContext().filesDir, "likes") }
 
     override fun beforeActivityLaunched() {
+        ErrorLogger.override = { tag, message, error -> Log.w(tag, message, error) }
         RetrofitProvider.override = (GridActivityTestRule)::throwNoInternetInTests
         LikableApiProvider.override = object : LikableApi {
             override fun call(): Single<List<LikableFromApi>> {
@@ -26,6 +28,7 @@ class GridActivityTestRule(
     }
 
     override fun afterActivityFinished() {
+        ErrorLogger.override = null
         RetrofitProvider.override = null
         LikableApiProvider.override = null
         likesFile.delete()
