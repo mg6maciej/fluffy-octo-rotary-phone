@@ -24,8 +24,8 @@ android {
         applicationId "pl.mg6.likeornot"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 1001000
-        versionName "1.1.0"
+        versionCode 1001001
+        versionName "1.1.1-SNAPSHOT"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
