@@ -4,8 +4,8 @@ import android.app.Activity
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import com.bumptech.glide.Glide
 import pl.mg6.likeornot.R
+import pl.mg6.likeornot.commons.view.loadFromUrl
 import pl.mg6.likeornot.grid.entity.Likable
 
 class OverlayView(private val activity: Activity, private val clickCallback: (Likable, Int) -> Unit) {
@@ -17,7 +17,7 @@ class OverlayView(private val activity: Activity, private val clickCallback: (Li
         val name = overlay.findViewById(R.id.grid_overlay_name) as TextView
         name.text = likable.name
         val image = overlay.findViewById(R.id.grid_overlay_image) as ImageView
-        Glide.with(activity).load(likable.image).into(image)
+        image.loadFromUrl(likable.image)
         val handleClick: (View) -> Unit = {
             overlay.visibility = View.GONE
             clickCallback.invoke(likable, idToImage.getValue(it.id))
