@@ -5,9 +5,9 @@ import io.reactivex.Completable
 import io.reactivex.Single
 import java.io.File
 
-typealias LikableToStatus = Map<String, Status>
+typealias LikableIdToStatus = Map<String, Status>
 
-fun loadLocalLikes(context: Context): Single<LikableToStatus> {
+fun loadLocalLikes(context: Context): Single<LikableIdToStatus> {
     return Single.fromCallable { readLikesFile(context) }
             .map(::toUuidToStatusMap)
             .onErrorReturnItem(emptyMap())

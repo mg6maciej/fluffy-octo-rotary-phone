@@ -9,7 +9,7 @@ import org.junit.Test
 class LikableServiceTest {
 
     private val api: LikableApi = mock()
-    private var localLikes: () -> Single<LikableToStatus> = { just(emptyMap()) }
+    private var localLikes: () -> Single<LikableIdToStatus> = { just(emptyMap()) }
 
     @Test
     fun shouldReturnEmptyList() {
