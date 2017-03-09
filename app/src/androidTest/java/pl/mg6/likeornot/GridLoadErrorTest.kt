@@ -3,11 +3,7 @@ package pl.mg6.likeornot
 import android.support.test.rule.ActivityTestRule
 import com.elpassion.android.commons.espresso.isDisplayed
 import com.elpassion.android.commons.espresso.onId
-import com.nhaarman.mockito_kotlin.any
-import com.nhaarman.mockito_kotlin.eq
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.verify
-import io.reactivex.Single
+import com.nhaarman.mockito_kotlin.*
 import io.reactivex.Single.error
 import org.junit.Rule
 import org.junit.Test
@@ -22,10 +18,8 @@ class GridLoadErrorTest {
         override fun beforeActivityLaunched() {
             ErrorLogger.override = logErrorMock
             RetrofitProvider.override = (GridActivityTestRule)::throwNoInternetInTests
-            LikableApiProvider.override = object : LikableApi {
-                override fun call(): Single<List<LikableFromApi>> {
-                    return error(Exception())
-                }
+            LikableApiProvider.override = mock {
+                on { call() } doReturn error(Exception())
             }
         }
 

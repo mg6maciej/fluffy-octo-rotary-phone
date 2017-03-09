@@ -3,7 +3,8 @@ package pl.mg6.likeornot
 import android.support.test.InstrumentationRegistry.getTargetContext
 import android.support.test.rule.ActivityTestRule
 import android.util.Log
-import io.reactivex.Single
+import com.nhaarman.mockito_kotlin.doReturn
+import com.nhaarman.mockito_kotlin.mock
 import io.reactivex.Single.just
 import java.io.File
 
@@ -17,10 +18,8 @@ class GridActivityTestRule(
     override fun beforeActivityLaunched() {
         ErrorLogger.override = { tag, message, error -> Log.w(tag, message, error) }
         RetrofitProvider.override = (GridActivityTestRule)::throwNoInternetInTests
-        LikableApiProvider.override = object : LikableApi {
-            override fun call(): Single<List<LikableFromApi>> {
-                return just(likablesFromApi)
-            }
+        LikableApiProvider.override = mock {
+            on { call() } doReturn just(likablesFromApi)
         }
         if (likesFileContent != null) {
             likesFile.writeText(likesFileContent)
