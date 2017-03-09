@@ -10,7 +10,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import pl.mg6.likeornot.R
-import pl.mg6.likeornot.commons.batch
+import pl.mg6.likeornot.commons.chunk
 import pl.mg6.likeornot.grid.api.impl.LikableApiProvider
 import pl.mg6.likeornot.grid.entity.Likable
 import pl.mg6.likeornot.grid.entity.Status
@@ -29,7 +29,7 @@ class GridActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.grid_activity)
         disposable = getLikables(LikableApiProvider.get(), { loadLocalLikes(this).subscribeOn(Schedulers.io()) })
-                .map { it.batch(9) }
+                .map { it.chunk(9) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::showLikables, this::showError)
     }
