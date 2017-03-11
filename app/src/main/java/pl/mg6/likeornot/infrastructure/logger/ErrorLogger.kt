@@ -11,11 +11,9 @@ object ErrorLogger {
     var override: LogErrorFunc? = null
 
     fun logError(tag: String, message: String, error: Throwable) {
+        val logErrorImpl = override ?: this::logcatFirebaseCrashlytics
         logErrorImpl(tag, message, error)
     }
-
-    private val logErrorImpl
-        get() = override ?: this::logcatFirebaseCrashlytics
 
     private fun logcatFirebaseCrashlytics(tag: String, message: String, error: Throwable) {
         Log.e(tag, message, error)
