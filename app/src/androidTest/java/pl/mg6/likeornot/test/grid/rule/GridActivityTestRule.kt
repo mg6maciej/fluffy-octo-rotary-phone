@@ -24,9 +24,9 @@ class GridActivityTestRule(
 
     override fun beforeActivityLaunched() {
         ErrorLogger.override = { tag, message, error -> Log.w(tag, message, error) }
-        RetrofitProvider.override = (Companion)::throwNoInternetInTests
-        LikableApiProvider.override = mock {
-            on { call() } doReturn just(likablesFromApi)
+        RetrofitProvider.override = Companion::throwNoInternetInTests
+        LikableApiProvider.override = {
+            mock { on { call() } doReturn just(likablesFromApi) }
         }
         if (likesFileContent != null) {
             likesFile.writeText(likesFileContent)

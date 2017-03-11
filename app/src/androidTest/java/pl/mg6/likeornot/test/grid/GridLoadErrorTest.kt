@@ -24,9 +24,9 @@ class GridLoadErrorTest {
 
         override fun beforeActivityLaunched() {
             ErrorLogger.override = logErrorMock
-            RetrofitProvider.override = (GridActivityTestRule)::throwNoInternetInTests
-            LikableApiProvider.override = mock {
-                on { call() } doReturn error(Exception())
+            RetrofitProvider.override = GridActivityTestRule.Companion::throwNoInternetInTests
+            LikableApiProvider.override = {
+                mock { on { call() } doReturn error(Exception()) }
             }
         }
 
