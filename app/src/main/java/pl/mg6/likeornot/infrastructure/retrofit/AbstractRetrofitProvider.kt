@@ -5,7 +5,6 @@ import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level.BODY
-import okhttp3.logging.HttpLoggingInterceptor.Level.NONE
 import pl.mg6.likeornot.BuildConfig
 import pl.mg6.likeornot.commons.Provider
 import retrofit2.Retrofit
@@ -15,7 +14,7 @@ abstract class AbstractRetrofitProvider(baseUrl: String) : Provider<Retrofit>({
     Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(OkHttpClient.Builder()
-                    .addInterceptor(HttpLoggingInterceptor().setLevel(if (BuildConfig.DEBUG) BODY else NONE))
+                    .apply { if (BuildConfig.DEBUG) addInterceptor(HttpLoggingInterceptor().setLevel(BODY)) }
                     .build())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
             .addConverterFactory(MoshiConverterFactory.create())
