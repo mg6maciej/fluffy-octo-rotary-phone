@@ -6,6 +6,7 @@ import android.util.Log
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
 import io.reactivex.Single.just
+import pl.mg6.likeornot.commons.throwNoInternetInTests
 import pl.mg6.likeornot.grid.api.LikableFromApi
 import pl.mg6.likeornot.grid.api.impl.LikableApiProvider
 import pl.mg6.likeornot.grid.api.michaelJacksonLikableFromApi
@@ -24,7 +25,7 @@ class GridActivityTestRule(
 
     override fun beforeActivityLaunched() {
         ErrorLogger.override = { tag, message, error -> Log.w(tag, message, error) }
-        RetrofitProvider.override = Companion::throwNoInternetInTests
+        RetrofitProvider.override = ::throwNoInternetInTests
         LikableApiProvider.override = {
             mock { on { call() } doReturn just(likablesFromApi) }
         }
@@ -38,10 +39,5 @@ class GridActivityTestRule(
         RetrofitProvider.override = null
         LikableApiProvider.override = null
         likesFile.delete()
-    }
-
-    companion object {
-
-        fun throwNoInternetInTests(): Nothing = throw Exception("No internet in tests!")
     }
 }

@@ -8,12 +8,12 @@ import io.reactivex.Single.error
 import org.junit.Rule
 import org.junit.Test
 import pl.mg6.likeornot.R
+import pl.mg6.likeornot.commons.throwNoInternetInTests
 import pl.mg6.likeornot.grid.api.impl.LikableApiProvider
 import pl.mg6.likeornot.grid.view.impl.GridActivity
 import pl.mg6.likeornot.infrastructure.logger.ErrorLogger
 import pl.mg6.likeornot.infrastructure.logger.LogErrorFunc
 import pl.mg6.likeornot.infrastructure.retrofit.RetrofitProvider
-import pl.mg6.likeornot.test.grid.rule.GridActivityTestRule
 
 class GridLoadErrorTest {
 
@@ -24,7 +24,7 @@ class GridLoadErrorTest {
 
         override fun beforeActivityLaunched() {
             ErrorLogger.override = logErrorMock
-            RetrofitProvider.override = GridActivityTestRule.Companion::throwNoInternetInTests
+            RetrofitProvider.override = ::throwNoInternetInTests
             LikableApiProvider.override = {
                 mock { on { call() } doReturn error(Exception()) }
             }
