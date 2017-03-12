@@ -1,7 +1,6 @@
 package pl.mg6.likeornot.test.grid
 
 import android.support.test.espresso.Espresso
-import android.support.test.rule.ActivityTestRule
 import android.util.Log
 import com.elpassion.android.commons.espresso.onId
 import com.elpassion.android.commons.espresso.swipeLeft
@@ -13,6 +12,7 @@ import org.junit.Rule
 import org.junit.Test
 import pl.mg6.likeornot.R
 import pl.mg6.likeornot.commons.ViewPagerIdlingResource
+import pl.mg6.likeornot.commons.activityTestRule
 import pl.mg6.likeornot.commons.throwNoInternetInTests
 import pl.mg6.likeornot.grid.api.LikableFromApi
 import pl.mg6.likeornot.grid.api.impl.LikableApiProvider
@@ -28,24 +28,19 @@ class GridLoadFromUrlTest {
     private val loadFromUrlMock: LoadFromUrlFunc = mock()
 
     @Rule @JvmField
-    val rule = object : ActivityTestRule<GridActivity>(GridActivity::class.java) {
-
-        override fun beforeActivityLaunched() {
-            ImageLoader.override = loadFromUrlMock
-            ErrorLogger.override = { tag, message, error -> Log.w(tag, message, error) }
-            RetrofitProvider.override = ::throwNoInternetInTests
-            LikableApiProvider.override = {
-                mock { on { call() } doReturn just(likablesFromApi) }
-            }
+    val rule = activityTestRule<GridActivity>(before = {
+        ImageLoader.override = loadFromUrlMock
+        ErrorLogger.override = { tag, message, error -> Log.w(tag, message, error) }
+        RetrofitProvider.override = ::throwNoInternetInTests
+        LikableApiProvider.override = {
+            mock { on { call() } doReturn just(likablesFromApi) }
         }
-
-        override fun afterActivityFinished() {
-            ImageLoader.override = null
-            ErrorLogger.override = null
-            RetrofitProvider.override = null
-            LikableApiProvider.override = null
-        }
-    }
+    }, after = {
+        ImageLoader.override = null
+        ErrorLogger.override = null
+        RetrofitProvider.override = null
+        LikableApiProvider.override = null
+    })
 
     private val pagerIdlingResource by lazy { ViewPagerIdlingResource(rule, R.id.grid_pager) }
 
