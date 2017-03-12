@@ -14,11 +14,11 @@ import org.junit.Test
 import pl.mg6.likeornot.R
 import pl.mg6.likeornot.commons.ViewPagerIdlingResource
 import pl.mg6.likeornot.commons.throwNoInternetInTests
-import pl.mg6.likeornot.commons.view.LoadFromUrlFunc
-import pl.mg6.likeornot.commons.view.loadFromUrlOverride
 import pl.mg6.likeornot.grid.api.LikableFromApi
 import pl.mg6.likeornot.grid.api.impl.LikableApiProvider
 import pl.mg6.likeornot.grid.view.impl.GridActivity
+import pl.mg6.likeornot.infrastructure.image_loader.ImageLoader
+import pl.mg6.likeornot.infrastructure.image_loader.LoadFromUrlFunc
 import pl.mg6.likeornot.infrastructure.logger.ErrorLogger
 import pl.mg6.likeornot.infrastructure.retrofit.RetrofitProvider
 import pl.mg6.likeornot.test.grid.interaction.onLikableItem
@@ -31,7 +31,7 @@ class GridLoadFromUrlTest {
     val rule = object : ActivityTestRule<GridActivity>(GridActivity::class.java) {
 
         override fun beforeActivityLaunched() {
-            loadFromUrlOverride = loadFromUrlMock
+            ImageLoader.override = loadFromUrlMock
             ErrorLogger.override = { tag, message, error -> Log.w(tag, message, error) }
             RetrofitProvider.override = ::throwNoInternetInTests
             LikableApiProvider.override = {
@@ -40,7 +40,7 @@ class GridLoadFromUrlTest {
         }
 
         override fun afterActivityFinished() {
-            loadFromUrlOverride = null
+            ImageLoader.override = null
             ErrorLogger.override = null
             RetrofitProvider.override = null
             LikableApiProvider.override = null

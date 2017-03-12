@@ -9,9 +9,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import pl.mg6.likeornot.R
-import pl.mg6.likeornot.commons.view.loadFromUrl
 import pl.mg6.likeornot.grid.entity.Likable
 import pl.mg6.likeornot.grid.entity.Status
+import pl.mg6.likeornot.infrastructure.image_loader.ImageLoader
 
 class GridPagerAdapter(private val gridItems: List<List<Likable>>, private val clickCallback: (Likable) -> Unit) : PagerAdapter() {
 
@@ -31,7 +31,7 @@ class GridPagerAdapter(private val gridItems: List<List<Likable>>, private val c
             val name = view.findViewById(R.id.likable_item_name) as TextView
             name.text = likable.name
             val image = view.findViewById(R.id.likable_item_image) as ImageView
-            image.loadFromUrl(likable.image)
+            ImageLoader.loadFromUrl(image, likable.image)
             likable.status?.let {
                 val status = view.findViewById(R.id.likable_item_status) as ImageView
                 status.setImageResource(it.imageId)

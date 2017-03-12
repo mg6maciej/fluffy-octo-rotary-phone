@@ -5,8 +5,8 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import pl.mg6.likeornot.R
-import pl.mg6.likeornot.commons.view.loadFromUrl
 import pl.mg6.likeornot.grid.entity.Likable
+import pl.mg6.likeornot.infrastructure.image_loader.ImageLoader
 
 class OverlayView(private val activity: Activity, private val clickCallback: (Likable, Int) -> Unit) {
 
@@ -17,7 +17,7 @@ class OverlayView(private val activity: Activity, private val clickCallback: (Li
         val name = overlay.findViewById(R.id.grid_overlay_name) as TextView
         name.text = likable.name
         val image = overlay.findViewById(R.id.grid_overlay_image) as ImageView
-        image.loadFromUrl(likable.image)
+        ImageLoader.loadFromUrl(image, likable.image)
         val handleClick: (View) -> Unit = {
             overlay.visibility = View.GONE
             clickCallback.invoke(likable, idToImage.getValue(it.id))
