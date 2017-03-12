@@ -21,6 +21,7 @@ import pl.mg6.likeornot.grid.api.impl.LikableApiProvider
 import pl.mg6.likeornot.grid.view.impl.GridActivity
 import pl.mg6.likeornot.infrastructure.logger.ErrorLogger
 import pl.mg6.likeornot.infrastructure.retrofit.RetrofitProvider
+import pl.mg6.likeornot.test.grid.interaction.onLikableItem
 
 class GridLoadFromUrlTest {
 
@@ -61,7 +62,7 @@ class GridLoadFromUrlTest {
     @Test
     fun shouldLoadImagesFromFirstAndSecondPage() {
         repeat(18) {
-            verify(loadFromUrlMock).invoke(any(), eq("http://image.png_$it"))
+            verify(loadFromUrlMock, times(1)).invoke(any(), eq("http://image.png_$it"))
         }
         verifyNoMoreInteractions(loadFromUrlMock)
     }
@@ -70,9 +71,15 @@ class GridLoadFromUrlTest {
     fun shouldLoadImagesFromThirdPageAfterSwipe() {
         onId(R.id.grid_pager).swipeLeft()
         repeat(27) {
-            verify(loadFromUrlMock).invoke(any(), eq("http://image.png_$it"))
+            verify(loadFromUrlMock, times(1)).invoke(any(), eq("http://image.png_$it"))
         }
         verifyNoMoreInteractions(loadFromUrlMock)
+    }
+
+    @Test
+    fun shouldLoadClickedImageTwice() {
+        onLikableItem(R.id.likable_item_1).click()
+        verify(loadFromUrlMock, times(2)).invoke(any(), eq("http://image.png_0"))
     }
 
     companion object {
