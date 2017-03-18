@@ -68,6 +68,7 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile "com.google.firebase:firebase-core:$google_deps_version"
     compile "com.google.firebase:firebase-crash:$google_deps_version"
+    compile 'pl.mg6.rxjava2.disposeondestroy:core:0.1.0'
     compile('com.crashlytics.sdk.android:crashlytics:2.6.7@aar') {
         transitive = true
     }

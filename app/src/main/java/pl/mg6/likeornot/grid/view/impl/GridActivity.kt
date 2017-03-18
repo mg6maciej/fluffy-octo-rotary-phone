@@ -7,7 +7,6 @@ import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.view.View.VISIBLE
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import pl.mg6.likeornot.R
 import pl.mg6.likeornot.commons.chunk
@@ -18,19 +17,20 @@ import pl.mg6.likeornot.grid.getLikables
 import pl.mg6.likeornot.grid.loadLocalLikes
 import pl.mg6.likeornot.grid.saveLocalLike
 import pl.mg6.likeornot.infrastructure.logger.ErrorLogger.logError
+import pl.mg6.rxjava2.disposeondestroy.disposeOnDestroy
 
 class GridActivity : AppCompatActivity() {
 
     private val overlayView by lazy { OverlayView(this, this::updateLikable) }
     private lateinit var adapter: GridPagerAdapter
-    private lateinit var disposable: Disposable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.grid_activity)
-        disposable = getLikables(LikableApiProvider.get(), { loadLocalLikes(this).subscribeOn(Schedulers.io()) })
+        getLikables(LikableApiProvider.get(), { loadLocalLikes(this).subscribeOn(Schedulers.io()) })
                 .map { it.chunk(9) }
                 .observeOn(AndroidSchedulers.mainThread())
+                .disposeOnDestroy(this)
                 .subscribe(this::showLikables, this::showError)
     }
 
@@ -57,10 +57,5 @@ class GridActivity : AppCompatActivity() {
     private fun showError(error: Throwable) {
         logError("GridActivity", "Cannot show likables!", error)
         findViewById(R.id.grid_load_error).visibility = VISIBLE
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        disposable.dispose()
     }
 }
